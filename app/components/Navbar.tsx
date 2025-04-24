@@ -32,7 +32,7 @@ export default function Navbar(): React.JSX.Element {
             style={{
                 paddingBlock: "1.5rem",
                 backdropFilter: "blur(15px)"
-            }} className={`w-screen flex justify-center items-center absolute top-0 left-0 z-[200]`}>
+            }} className={`w-screen flex justify-center items-center absolute bottom-0 left-0 z-[200]`}>
             <section className={`w-[85%] bg-transparent flex text-white justify-between`}>
 
                 {/*Applicaiton Name here*/}

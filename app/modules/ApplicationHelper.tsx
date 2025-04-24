@@ -5,11 +5,15 @@ export namespace ApplicationType {
         x: PositionValueType;
         y: PositionValueType;
     }
+
+    export interface Size {
+        height: number;
+        width: number;
+    }
 }
 
 export class ApplicationHelper {
     public static current: ApplicationHelper = new ApplicationHelper();
-
 
 }
 
