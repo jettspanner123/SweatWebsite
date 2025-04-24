@@ -66,4 +66,6 @@ export class ApplicationLinearGradient {
     appBlueGradientInverted: string = `linear-gradient(to bottom, ${ApplicationColor.current.appBlueDark} 0%, ${ApplicationColor.current.appBlueLight} 100%)`;
     appBlueGradient: string = `linear-gradient(to bottom, ${ApplicationColor.current.appBlueLight} 0%, ${ApplicationColor.current.appBlueDark} 100%)`;
     appTransparentGradient: string = `linear-gradient(to bottom, transparent 0%, transparent 0%)`;
+    appGreenGradient: string = `linear-gradient(to bottom, ${ApplicationColor.current.appGreenLight} 0%, ${ApplicationColor.current.appGreenDark} 100%)`;
+    appThanosGradient: string = `linear-gradient(to bottom, ${ApplicationColor.current.appThanosLight} 0%, ${ApplicationColor.current.appThanosDark} 100%)`;
 }

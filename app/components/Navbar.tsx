@@ -8,9 +8,9 @@ export default function Navbar(): React.JSX.Element {
 
     const navbarOptions: Array<{ name: string, link: string }> = [
         {name: 'Home', link: '/'},
-        {name: 'About', link: '/about'},
         {name: 'Features', link: '/features'},
         {name: 'Working', link: '/working'},
+        {name: 'About', link: '/about'},
     ];
 
     return (
@@ -30,14 +30,15 @@ export default function Navbar(): React.JSX.Element {
                 ease: [0.85, 0, 0.15, 1]
             }}
             style={{
-                paddingBlock: "1.5rem"
-            }} className={`w-screen flex justify-center items-center`}>
+                paddingBlock: "1.5rem",
+                backdropFilter: "blur(15px)"
+            }} className={`w-screen flex justify-center items-center absolute top-0 left-0 z-[200]`}>
             <section className={`w-[85%] bg-transparent flex text-white justify-between`}>
 
                 {/*Applicaiton Name here*/}
                 <div className={`flex gap-[0.25rem] items-center`}>
                     <BiDumbbell size={35}/>
-                    <h1 className={`text-[1.75rem] oswaldBold uppercase`}>Sweat It</h1>
+                    <h1 className={`text-[2.25rem] oswaldBold uppercase`}>Sweat It</h1>
                 </div>
 
 
@@ -72,9 +73,9 @@ export function NavbarLink(item: NavbarLinkInterface): React.JSX.Element {
 
     return (
         <li onMouseOver={() => setHover(true)} onMouseLeave={() => setHover(false)} ref={ref}
-            style={{padding: "0.5rem"}}
+            style={{paddingBlock: "0.15rem", paddingInline: "0.5rem"}}
             className={`w-[100px] font-semibold hover:cursor-pointer flex justify-center items-center relative rounded-full`}>
-            <span className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[3]`}>
+            <span className={`absolute text-[1rem] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[3]`}>
                 {item.name}
             </span>
 
@@ -85,7 +86,7 @@ export function NavbarLink(item: NavbarLinkInterface): React.JSX.Element {
                     width: isHovered ? ref.current?.getBoundingClientRect().width : selectedPageLink === item.link ? ref.current?.getBoundingClientRect().width : 0,
                     scaleY: isHovered ? 1 : selectedPageLink === item.link ? 1 : 0.25,
                     transformOrigin: "center"
-                }} className={`absolute left-0 top-0  rounded-full transition-all duration-500 ease-in-out`}>
+                }} className={`absolute left-0 top-0 rounded-full transition-all duration-500 ease-in-out`}>
 
             </motion.div>
 
