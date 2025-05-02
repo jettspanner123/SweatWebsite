@@ -109,7 +109,7 @@ export default function AutoScrollingMarquee(): React.JSX.Element {
                 duration: 2500,
                 ease: "linear",
             }}
-            className={`oswaldBold absolute top-[3rem] z-[300] text-white uppercase text-[3rem] w-[10000vw] flex gap-[1rem]`}>
+            className={`oswaldBold absolute top-[3rem] z-[300] text-white uppercase text-[2rem] w-[10000vw] flex gap-[1rem]`}>
             {MarqueeOptions.map((item: { name: string, color: string }, index: number): React.JSX.Element => {
                 return <motion.div
                     animate={{
