@@ -10,8 +10,6 @@ interface PrimaryButtonWithIconProps {
 }
 
 const PrimaryButtonWithIcon = ({text, icon, background, onTapGesture}: PrimaryButtonWithIconProps): React.JSX.Element => {
-
-
     return (
         <motion.div>
             <motion.button

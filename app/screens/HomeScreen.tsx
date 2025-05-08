@@ -1,7 +1,7 @@
 import React from "react";
-import {ApplicationColor, ApplicationLinearGradient, CurrentSelectedScreenType} from "@/app/modules/ApplicationHelper";
-import {motion, useScroll, useTransform} from "framer-motion";
-import Image from "next/image";
+import {ApplicationLinearGradient, CurrentSelectedScreenType} from "@/app/modules/ApplicationHelper";
+import {AnimatePresence, motion, useScroll, useSpring, useTransform} from "framer-motion";
+import Image, {StaticImageData} from "next/image";
 import PrimaryButtonWithIcon from "@/app/components/PrimaryButton";
 import MouseMagnetic from "@/app/components/MouseMagnetic";
 import IphoneImage from "@/app/assets/iphone.png";
@@ -18,7 +18,11 @@ import WorkoutImage from "@/app/assets/TabBarDumbbell.svg";
 import HomeImage from "@/app/assets/hom.svg";
 import DietImage from "@/app/assets/Food.png";
 import ProfileImage from "@/app/assets/User.png";
+import CoachImage from "@/app/assets/Training.png";
 import AppHomeScreenImage from "@/app/assets/app_home.jpeg";
+import AppWorkoutScreenImage from "@/app/assets/workout_screen.png";
+import AppDietScreenImage from "@/app/assets/diet_screen.png";
+import AppProfileScreenImage from "@/app/assets/diet_screen.png";
 
 
 interface HomeScreenProps {
@@ -46,14 +50,26 @@ export default function HomeScreen({
 
     const description: string = "Your all-in-one fitness companion. Track workouts, follow personalized diet plans, and achieve your health goals — all in one app.";
 
+    const firstSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
+
+    const {scrollYProgress: firstSectionScrollProgress} = useScroll({
+        target: firstSectionRef,
+        offset: ["end end", "end start"]
+    })
+
+    const iphoneYTransformation = useTransform(firstSectionScrollProgress, [0, 1], ["translate(0, 0)", "translate(0, 100%)"]);
+
     return (
         <React.Fragment>
             <main
-                className={`min-h-[300vh] w-screen relative`}>
+                className={`w-screen relative overflow-x-hidden`}>
 
-                <section style={{
-                    background: ApplicationLinearGradient.current.appBackground
-                }} className={`h-screen w-screen relative`}>
+                <section
+                    ref={firstSectionRef}
+                    style={{
+                        background: ApplicationLinearGradient.current.appBackground
+                    }}
+                    className={`h-screen w-screen relative`}>
 
 
                     {/*backgorund cards*/}
@@ -87,7 +103,7 @@ export default function HomeScreen({
                     </motion.div>
 
 
-                    {/*twing workout and diet icons*/}
+                    {/*twin workout and diet icons*/}
                     <div
                         className={`absolute w-[70%] flex justify-between items-center top-[43%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200]`}>
 
@@ -95,7 +111,7 @@ export default function HomeScreen({
                         {/*workout icon*/}
                         <MouseMagnetic>
                             <motion.div data-scroll data-scroll-speed={"0.3"} style={{padding: "3rem"}}>
-                                <motion.div animate={{scale: 1}} initial={{scale: 0}}
+                                <motion.div animate={{scale: 1, rotate: 0}} initial={{scale: 0, rotate: -90}}
                                             transition={{duration: 1, ease: [0.87, 0, 0.13, 1], delay: 0.5}}
                                             style={{background: ApplicationLinearGradient.current.appRedGradient}}
                                             className={`h-[6rem] aspect-square rounded-full flex justify-center items-center`}>
@@ -108,7 +124,7 @@ export default function HomeScreen({
                         {/*diet icon*/}
                         <MouseMagnetic>
                             <motion.div data-scroll data-scroll-speed={"0.05"} style={{padding: "3rem"}}>
-                                <motion.div animate={{scale: 1}} initial={{scale: 0}}
+                                <motion.div animate={{scale: 1, rotate: 0}} initial={{scale: 0, rotate: -90}}
                                             transition={{duration: 1, ease: [0.87, 0, 0.13, 1], delay: 0.75}}
                                             style={{background: ApplicationLinearGradient.current.appGreenGradient}}
                                             className={`h-[6rem] aspect-square rounded-full flex justify-center items-center`}>
@@ -118,7 +134,6 @@ export default function HomeScreen({
                         </MouseMagnetic>
 
                     </div>
-
 
                     {/*hero section with a overlay div*/}
                     <div
@@ -197,29 +212,165 @@ export default function HomeScreen({
 
                     {/*iphone image section with div overlay*/}
                     <motion.div
-                        animate={{ y: 0 }}
-                        initial={{ y: 1200}}
-                        transition={{ duration: 1.25, ease: [0.87, 0, 0.13, 1], delay: 0.5 }}
+                        animate={{y: 0}}
+                        initial={{y: 1200}}
+                        transition={{duration: 1.25, ease: [0.87, 0, 0.13, 1], delay: 0.5}}
                         className={`absolute top-0 left-0 pointer-events-none w-screen h-screen flex justify-center items-center`}>
-                        <div className={`h-full w-full relative translate-y-[55%]`}>
+                        <motion.div style={{transform: iphoneYTransformation}}
+                                    className={`h-full w-full relative translate-y-[55%]`}>
                             <Image src={IphoneImage} style={{scale: 0.7}} alt={""}
                                    className={`object-cover object-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[3300]`}/>
 
-                            <Image src={AppHomeScreenImage} alt={""} style={{ scale: 0.39 }} className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[10rem]`}/>
-                        </div>
+                            <Image src={AppHomeScreenImage} alt={""} style={{scale: 0.39}}
+                                   className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[10rem]`}/>
+                        </motion.div>
                     </motion.div>
                 </section>
 
 
-                <section className={`w-screen h-[200vh] relative`}>
-
-                    <section className={`w-screen h-screen sticky top-0 bg-black`}>
-
-
-                    </section>
-                </section>
+                <FeatureScreen/>
 
             </main>
         </React.Fragment>
+    )
+}
+
+
+const FeatureScreen = (): React.JSX.Element => {
+
+    // First Section Shit
+    const firstSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
+    const {scrollYProgress: firstSectionScrollProgress} = useScroll({
+        target: firstSectionRef,
+        offset: ["start 80%", "start 25%"]
+    })
+    const firstSectionIphoneTranslation = useTransform(firstSectionScrollProgress, [0, 1], [800, 0]);
+    const firstSectionHeadingIconTranslation = useTransform(firstSectionScrollProgress, [0, 1], [-370, 0]);
+    const firstSectionText: string = "We’ve built a feature-packed workout and diet application for iOS to help users achieve their fitness goals with ease. It offers personalized workout plans, diet tracking, progress monitoring, and daily reminders. Designed for all fitness levels, our app makes staying healthy simple, engaging, and effective.";
+
+
+    // Second Section Shit
+    const secondSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
+    const {scrollYProgress: secondSectionScrollProgress} = useScroll({
+        target: secondSectionRef,
+        offset: ["start end", "start 25%"]
+    })
+    const secondSectionHeadingIconTranslation = useTransform(secondSectionScrollProgress, [0, 1], [370, 0]);
+
+
+    const secondSectionTexts: Array<string> = [
+        "The home page of the app serves as a personalized dashboard, offering users a quick and clear overview of their daily health metrics and tasks. It features intuitive widgets that display key information such as calories ingested, calories burned, and water intake, helping users stay on track with their fitness goals. Additionally, an \"Agenda Today\" widget outlines scheduled workouts, meals, or other wellness activities, keeping users organized and motivated throughout the day. The clean and user-friendly layout ensures that all essential data is accessible at a glance, making it easy to monitor progress and maintain healthy habits.",
+    ];
+
+    const secondSectionImages: Array<StaticImageData> = [AppHomeScreenImage, AppWorkoutScreenImage, AppDietScreenImage, AppProfileScreenImage];
+    const [currentSelectedScreen, setCurrentSelectedScreen] = React.useState<number>(0);
+
+
+    return (
+        <section className={`w-screen h-[300vh] relative bg-black overflow-y-auto`}>
+
+
+            {/*first seciont*/}
+            <section ref={firstSectionRef}
+                     className={`w-screen h-screen flex justify-center items-center`}>
+
+
+                <div style={{paddingInline: "3rem", paddingBlock: "3.5rem"}} className={`flex-2 h-full `}>
+
+
+                    {/*first section heading*/}
+                    <div className={`flex gap-[1rem] items-center relative w-[20rem]`}>
+                        <motion.div style={{
+                            background: ApplicationLinearGradient.current.appRedGradient,
+                            x: firstSectionHeadingIconTranslation
+                        }} className={`h-[3.5rem] aspect-square flex justify-center items-center rounded-full`}>
+                            <Image src={HomeImage} alt={""} className={`scale-75`}/>
+                        </motion.div>
+                        <motion.h1 style={{
+                            transformOrigin: "left center",
+                            x: firstSectionHeadingIconTranslation
+                        }} className={`oswaldBold uppercase text-[3rem] relative text-white `}>
+                            Quick Look
+                        </motion.h1>
+                    </div>
+
+
+                    {/*first section text*/}
+                    <motion.h1
+                        style={{marginTop: "1rem"}}
+                        className={`text-[1.25rem] text-white text-justify`}>
+                        {firstSectionText}
+                    </motion.h1>
+                </div>
+
+
+                <motion.div data-scroll data-scroll-speed={"0.5"}>
+                    <motion.div style={{x: firstSectionIphoneTranslation}}
+                                className={`flex flex-1 h-full justify-center items-center`}>
+                        <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    </motion.div>
+                </motion.div>
+            </section>
+
+
+            {/*second section*/}
+            <section ref={secondSectionRef} className={`w-screen h-screen flex justify-center items-center`}>
+
+                {/*second section iphone*/}
+                <motion.div data-scroll data-scroll-speed={"0.5"}>
+                    <motion.div className={`flex flex-1 h-full justify-center items-center`}>
+                        <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    </motion.div>
+                </motion.div>
+
+
+                <div style={{paddingInline: "3rem", paddingBlock: "3.5rem"}} className={`flex-2 h-full flex justify-between flex-col `}>
+
+
+                    {/*second section heading*/}
+                    <div className={`flex gap-[1rem]  items-center relative justify-end`}>
+                        <motion.div style={{
+                            background: ApplicationLinearGradient.current.appRedGradient,
+                            x: secondSectionHeadingIconTranslation
+                        }} className={`h-[3.5rem] aspect-square flex justify-center items-center rounded-full`}>
+                            <Image src={HomeImage} alt={""} className={`scale-75`}/>
+                        </motion.div>
+                        <motion.h1 style={{
+                            transformOrigin: "left center",
+                            x: secondSectionHeadingIconTranslation
+                        }} className={`oswaldBold uppercase text-[3rem] relative text-white `}>
+                            Application Features
+                        </motion.h1>
+                    </div>
+
+
+                    {/*second section text*/}
+                    <motion.h1
+                        style={{marginTop: "1rem"}}
+                        className={`text-[1.25rem] text-white text-justify`}>
+                        <AnimatePresence>
+                            <motion.div>
+                                {secondSectionTexts[currentSelectedScreen]}
+                            </motion.div>
+                        </AnimatePresence>
+                    </motion.h1>
+                </div>
+            </section>
+        </section>
+    )
+}
+
+interface ImageWithImageProps {
+    withImage: StaticImageData;
+}
+
+const IphoneWithImage = ({withImage}: ImageWithImageProps) => {
+    return (
+        <motion.div style={{height: 1000, width: 550}} className={`relative`}>
+            <Image src={IphoneImage} alt={""} style={{scale: 1.3}}
+                   className={`absolute left-1/2 z-[1000] top-1/2 -translate-x-1/2 -translate-y-1/2`}/>
+            <Image src={withImage} alt={""} style={{scale: 0.8, transform: "translate(0, -7rem)"}}
+                   className={`rounded-[80px]`}/>
+        </motion.div>
     )
 }
