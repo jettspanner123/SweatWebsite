@@ -1,5 +1,5 @@
 import React from "react";
-import {ApplicationLinearGradient, CurrentSelectedScreenType} from "@/app/modules/ApplicationHelper";
+import {ApplicationColor, ApplicationLinearGradient, CurrentSelectedScreenType} from "@/app/modules/ApplicationHelper";
 import {AnimatePresence, motion, useScroll, useSpring, useTransform} from "framer-motion";
 import Image, {StaticImageData} from "next/image";
 import PrimaryButtonWithIcon from "@/app/components/PrimaryButton";
@@ -11,6 +11,9 @@ import IphoneImage from "@/app/assets/iphone.png";
 import {FaApple} from "react-icons/fa";
 import {MdEmail} from "react-icons/md";
 import {MotionValue} from "motion";
+import {FaChevronRight} from "react-icons/fa";
+import {FaChevronLeft} from "react-icons/fa";
+import {RxCross1} from "react-icons/rx";
 
 
 // IMages import
@@ -23,6 +26,7 @@ import AppHomeScreenImage from "@/app/assets/app_home.jpeg";
 import AppWorkoutScreenImage from "@/app/assets/workout_screen.png";
 import AppDietScreenImage from "@/app/assets/diet_screen.png";
 import AppProfileScreenImage from "@/app/assets/diet_screen.png";
+import {FaCrosshairs} from "react-icons/fa6";
 
 
 interface HomeScreenProps {
@@ -247,6 +251,15 @@ const FeatureScreen = (): React.JSX.Element => {
     const firstSectionIphoneTranslation = useTransform(firstSectionScrollProgress, [0, 1], [800, 0]);
     const firstSectionHeadingIconTranslation = useTransform(firstSectionScrollProgress, [0, 1], [-370, 0]);
     const firstSectionText: string = "We’ve built a feature-packed workout and diet application for iOS to help users achieve their fitness goals with ease. It offers personalized workout plans, diet tracking, progress monitoring, and daily reminders. Designed for all fitness levels, our app makes staying healthy simple, engaging, and effective.";
+    const firstSectionTags: Array<string> = [
+        "#Healthy",
+        "#EatGood",
+        "#Workout",
+        "#PersonalisedWorkout",
+        "#CleanFood",
+        "#BalancedDiet",
+        "#AiCoach",
+    ];
 
 
     // Second Section Shit
@@ -259,7 +272,8 @@ const FeatureScreen = (): React.JSX.Element => {
 
 
     const secondSectionTexts: Array<string> = [
-        "The home page of the app serves as a personalized dashboard, offering users a quick and clear overview of their daily health metrics and tasks. It features intuitive widgets that display key information such as calories ingested, calories burned, and water intake, helping users stay on track with their fitness goals. Additionally, an \"Agenda Today\" widget outlines scheduled workouts, meals, or other wellness activities, keeping users organized and motivated throughout the day. The clean and user-friendly layout ensures that all essential data is accessible at a glance, making it easy to monitor progress and maintain healthy habits.",
+        "The home page is a personalized dashboard showing daily health stats like calories, water intake, and workouts. Simple widgets and a clear layout help users stay on track and organized at a glance.",
+        "The Diet page simplifies nutrition tracking with a smart food scanner that instantly shows calories and macros. Users can log meals, view past entries, and get personalized recommendations to stay on track with their goals.",
     ];
 
     const secondSectionImages: Array<StaticImageData> = [AppHomeScreenImage, AppWorkoutScreenImage, AppDietScreenImage, AppProfileScreenImage];
@@ -275,7 +289,7 @@ const FeatureScreen = (): React.JSX.Element => {
                      className={`w-screen h-screen flex justify-center items-center`}>
 
 
-                <div style={{paddingInline: "3rem", paddingBlock: "3.5rem"}} className={`flex-2 h-full `}>
+                <div style={{paddingInline: "5rem", paddingBlock: "5rem"}} className={`flex-2 h-full `}>
 
 
                     {/*first section heading*/}
@@ -301,12 +315,19 @@ const FeatureScreen = (): React.JSX.Element => {
                         className={`text-[1.25rem] text-white text-justify`}>
                         {firstSectionText}
                     </motion.h1>
+
+                    <div style={{ marginTop: "3rem" }} className={`flex flex-wrap gap-[0.5rem] w-[65%]`}>
+                        {firstSectionTags.map((item: string, index: number): React.JSX.Element => {
+                            return <motion.div whileHover={{ scale: 1.1, marginInline: "1rem", cursor: "default", background: ApplicationLinearGradient.current.appThanosGradient }} style={{ background: ApplicationLinearGradient.current.appRedGradient, paddingBlock: "0.75rem", paddingInline: "1rem", borderRadius: "100px" }} className={`text-[1rem] font-bold text-white`} key={index}>{item}</motion.div>
+                        })}
+                    </div>
                 </div>
 
 
                 <motion.div data-scroll data-scroll-speed={"0.5"}>
-                    <motion.div style={{x: firstSectionIphoneTranslation}}
-                                className={`flex flex-1 h-full justify-center items-center`}>
+                    <motion.div
+                        style={{x: firstSectionIphoneTranslation, paddingRight: "2rem"}}
+                        className={`flex flex-1 h-full justify-start items-center`}>
                         <IphoneWithImage withImage={AppHomeScreenImage}/>
                     </motion.div>
                 </motion.div>
@@ -318,44 +339,118 @@ const FeatureScreen = (): React.JSX.Element => {
 
                 {/*second section iphone*/}
                 <motion.div data-scroll data-scroll-speed={"0.5"}>
-                    <motion.div className={`flex flex-1 h-full justify-center items-center`}>
-                        <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <motion.div style={{paddingLeft: "2rem"}} className={`flex flex-1 h-full justify-end items-center`}>
+                        <AnimatePresence mode={"wait"}>
+                            <motion.div
+                                initial={{opacity: 0, y: 10, filter: "blur(10px)"}}
+                                animate={{opacity: 1, y: 0, filter: "blur(0px)"}}
+                                exit={{opacity: 0, y: -10, filter: "blur(10px)"}}
+                                key={currentSelectedScreen}>
+                                <IphoneWithImage withImage={secondSectionImages[currentSelectedScreen]}/>
+                            </motion.div>
+                        </AnimatePresence>
                     </motion.div>
                 </motion.div>
 
 
-                <div style={{paddingInline: "3rem", paddingBlock: "3.5rem"}} className={`flex-2 h-full flex justify-between flex-col `}>
+                <div style={{paddingInline: "5rem", paddingBlock: "5rem"}}
+                     className={`flex-2 h-full flex justify-between flex-col `}>
 
 
                     {/*second section heading*/}
-                    <div className={`flex gap-[1rem]  items-center relative justify-end`}>
-                        <motion.div style={{
-                            background: ApplicationLinearGradient.current.appRedGradient,
-                            x: secondSectionHeadingIconTranslation
-                        }} className={`h-[3.5rem] aspect-square flex justify-center items-center rounded-full`}>
-                            <Image src={HomeImage} alt={""} className={`scale-75`}/>
-                        </motion.div>
-                        <motion.h1 style={{
-                            transformOrigin: "left center",
-                            x: secondSectionHeadingIconTranslation
-                        }} className={`oswaldBold uppercase text-[3rem] relative text-white `}>
-                            Application Features
-                        </motion.h1>
+                    <div>
+                        <div className={`flex gap-[1rem]  items-center relative justify-end`}>
+                            <motion.div style={{
+                                background: ApplicationLinearGradient.current.appRedGradient,
+                                x: secondSectionHeadingIconTranslation
+                            }} className={`h-[3.5rem] aspect-square flex justify-center items-center rounded-full`}>
+                                <Image src={HomeImage} alt={""} className={`scale-75`}/>
+                            </motion.div>
+                            <motion.h1 style={{
+                                transformOrigin: "left center",
+                                x: secondSectionHeadingIconTranslation
+                            }} className={`oswaldBold uppercase text-[3rem] relative text-white `}>
+                                Application Features
+                            </motion.h1>
+                        </div>
+
+
+                        {/*second section text*/}
+                        <AnimatePresence mode="wait">
+                            <motion.h1
+                                key={currentSelectedScreen} // Important: key triggers re-mount
+                                style={{marginTop: "1rem"}}
+                                className="text-[1.25rem] text-white text-right flex"
+                                initial={{opacity: 0, y: 10, filter: "blur(10px)"}}
+                                animate={{opacity: 1, y: 0, filter: "blur(0px)"}}
+                                exit={{opacity: 0, y: -10, filter: "blur(10px)"}}
+                                transition={{duration: 0.4}}
+                            >
+                                {secondSectionTexts[currentSelectedScreen]}
+                            </motion.h1>
+                        </AnimatePresence>
                     </div>
 
 
-                    {/*second section text*/}
-                    <motion.h1
-                        style={{marginTop: "1rem"}}
-                        className={`text-[1.25rem] text-white text-justify`}>
-                        <AnimatePresence>
-                            <motion.div>
-                                {secondSectionTexts[currentSelectedScreen]}
+                    {/*twin right and left button*/}
+                    <div style={{marginBottom: "10rem"}} className={`w-full h-[2rem] flex justify-end items-center`}>
+                        <div className={`flex gap-[1rem]`}>
+
+
+                            {/*left button*/}
+                            <AnimatePresence>
+                                {currentSelectedScreen !== 0 && (
+                                    <motion.div
+                                        animate={{scale: 1}}
+                                        initial={{scale: 0}}
+                                        exit={{scale: 0}}
+                                        transition={{ease: [0.85, 0, 0.15, 1]}}
+                                        whileHover={{scale: 1.1, cursor: "pointer"}}
+                                        whileTap={{scale: 0.9}}
+                                        onClick={() => {
+                                            if (currentSelectedScreen > 0) {
+                                                setCurrentSelectedScreen(currentSelectedScreen - 1);
+                                            }
+                                        }}
+                                        className={`flex justify-center items-center h-[5rem] aspect-square border-[1px] border-white/20 rounded-full`}>
+
+                                        <FaChevronLeft color={"rgba(255,255,255,0.5)"}/>
+
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+
+                            {/*right button*/}
+                            <motion.div
+                                animate={{opacity: currentSelectedScreen === secondSectionTexts.length ? 0.5 : 1}}
+                                transition={{ease: [0.85, 0, 0.15, 1]}}
+                                whileHover={{scale: 1.1, cursor: "pointer"}}
+                                whileTap={{scale: 0.9}}
+                                onClick={() => {
+                                    if (currentSelectedScreen < secondSectionTexts.length) {
+                                        setCurrentSelectedScreen(currentSelectedScreen + 1);
+                                    }
+                                }}
+                                className={`flex justify-center items-center h-[5rem] aspect-square border-[1px] border-white/20 rounded-full`}>
+
+                                {currentSelectedScreen < secondSectionTexts.length ?
+                                    <FaChevronRight color={"rgba(255,255,255,0.5)"}/> :
+                                    <RxCross1 color={"rgba(255,255,255,0.5)"}/>}
+
                             </motion.div>
-                        </AnimatePresence>
-                    </motion.h1>
+                        </div>
+                    </div>
                 </div>
             </section>
+
+
+
+            {/*third section */}
+
+            <section style={{ background: ApplicationLinearGradient.current.appRedGradient }} className={`h-screen w-screen flex flex-col`}>
+            </section>
+
         </section>
     )
 }
