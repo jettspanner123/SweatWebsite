@@ -15,6 +15,14 @@ export namespace ApplicationType {
 export class ApplicationHelper {
     public static current: ApplicationHelper = new ApplicationHelper();
 
+
+
+}
+
+
+export enum CurrentSelectedScreenType {
+    HOME_SCREEN,
+    CONTACT_US_SCREEN
 }
 
 export class ApplicationColor {
