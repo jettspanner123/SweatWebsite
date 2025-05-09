@@ -63,6 +63,7 @@ export default function HomeScreen({
 
     const iphoneYTransformation = useTransform(firstSectionScrollProgress, [0, 1], ["translate(0, 0)", "translate(0, 100%)"]);
 
+
     return (
         <React.Fragment>
             <main
@@ -242,6 +243,9 @@ export default function HomeScreen({
 
 const FeatureScreen = (): React.JSX.Element => {
 
+
+    const [currentSelectedScreen, setCurrentSelectedScreen] = React.useState<number>(0);
+
     // First Section Shit
     const firstSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
     const {scrollYProgress: firstSectionScrollProgress} = useScroll({
@@ -269,19 +273,23 @@ const FeatureScreen = (): React.JSX.Element => {
         offset: ["start end", "start 25%"]
     })
     const secondSectionHeadingIconTranslation = useTransform(secondSectionScrollProgress, [0, 1], [370, 0]);
-
-
     const secondSectionTexts: Array<string> = [
         "The home page is a personalized dashboard showing daily health stats like calories, water intake, and workouts. Simple widgets and a clear layout help users stay on track and organized at a glance.",
         "The Diet page simplifies nutrition tracking with a smart food scanner that instantly shows calories and macros. Users can log meals, view past entries, and get personalized recommendations to stay on track with their goals.",
     ];
-
     const secondSectionImages: Array<StaticImageData> = [AppHomeScreenImage, AppWorkoutScreenImage, AppDietScreenImage, AppProfileScreenImage];
-    const [currentSelectedScreen, setCurrentSelectedScreen] = React.useState<number>(0);
+
+
+    // Third section shit
+    const thirdSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
+    const {scrollYProgress: thirdSectionScrollProgress} = useScroll({
+        target: thirdSectionRef,
+        offset: ["start end", "start -10%"]
+    })
 
 
     return (
-        <section className={`w-screen h-[300vh] relative bg-black overflow-y-auto`}>
+        <section className={`w-screen relative bg-black overflow-y-auto`}>
 
 
             {/*first seciont*/}
@@ -316,9 +324,19 @@ const FeatureScreen = (): React.JSX.Element => {
                         {firstSectionText}
                     </motion.h1>
 
-                    <div style={{ marginTop: "3rem" }} className={`flex flex-wrap gap-[0.5rem] w-[65%]`}>
+                    <div style={{marginTop: "3rem"}} className={`flex flex-wrap gap-[0.5rem] w-[65%]`}>
                         {firstSectionTags.map((item: string, index: number): React.JSX.Element => {
-                            return <motion.div whileHover={{ scale: 1.1, marginInline: "1rem", cursor: "default", background: ApplicationLinearGradient.current.appThanosGradient }} style={{ background: ApplicationLinearGradient.current.appRedGradient, paddingBlock: "0.75rem", paddingInline: "1rem", borderRadius: "100px" }} className={`text-[1rem] font-bold text-white`} key={index}>{item}</motion.div>
+                            return <motion.div whileHover={{
+                                scale: 1.1,
+                                marginInline: "1rem",
+                                cursor: "default",
+                                background: ApplicationLinearGradient.current.appThanosGradient
+                            }} style={{
+                                background: ApplicationLinearGradient.current.appRedGradient,
+                                paddingBlock: "0.75rem",
+                                paddingInline: "1rem",
+                                borderRadius: "100px"
+                            }} className={`text-[1rem] font-bold text-white`} key={index}>{item}</motion.div>
                         })}
                     </div>
                 </div>
@@ -445,10 +463,23 @@ const FeatureScreen = (): React.JSX.Element => {
             </section>
 
 
-
             {/*third section */}
 
-            <section style={{ background: ApplicationLinearGradient.current.appRedGradient }} className={`h-screen w-screen flex flex-col`}>
+            <motion.section
+                data-scroll
+                data-scroll-speed={"0.25"}
+                ref={thirdSectionRef}
+                className={`h-screen w-screen flex flex-col bg-blue-300`}>
+
+                {/*third section marquee*/}
+
+            </motion.section>
+
+
+
+            {/*fourth section*/}
+            <section className={`h-screen w-screen bg-red-300`}>
+
             </section>
 
         </section>
