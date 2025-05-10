@@ -26,7 +26,6 @@ import AppHomeScreenImage from "@/app/assets/app_home.jpeg";
 import AppWorkoutScreenImage from "@/app/assets/workout_screen.png";
 import AppDietScreenImage from "@/app/assets/diet_screen.png";
 import AppProfileScreenImage from "@/app/assets/diet_screen.png";
-import {FaCrosshairs} from "react-icons/fa6";
 
 
 interface HomeScreenProps {
@@ -38,6 +37,7 @@ export default function HomeScreen({
                                        currentSelectedScreen,
                                        setCurrentSelectedScreen
                                    }: HomeScreenProps): React.JSX.Element {
+
 
     const numberOfBoxesForOverflow: Array<number> = Array.from({length: 50}, (_, i: number): number => i + 1);
 
@@ -243,6 +243,12 @@ export default function HomeScreen({
 
 const FeatureScreen = (): React.JSX.Element => {
 
+    const springOptions = {
+        stiffness: 150,
+        mass: 0.5,
+        damping: 20,
+        ease: [0, 0.55, 0.45, 1]
+    }
 
     const [currentSelectedScreen, setCurrentSelectedScreen] = React.useState<number>(0);
 
@@ -284,9 +290,37 @@ const FeatureScreen = (): React.JSX.Element => {
     const thirdSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
     const {scrollYProgress: thirdSectionScrollProgress} = useScroll({
         target: thirdSectionRef,
-        offset: ["start end", "start -10%"]
+        offset: ["start end", "end start"]
     })
 
+    thirdSectionScrollProgress.on("change", (e) => {
+        console.log(e);
+    })
+    const thirdSectionScrollTranslation = useTransform(thirdSectionScrollProgress, [0, 1], ["0%", "-250%"]);
+    const thirdSectionNegativeScrollTranslation = useTransform(thirdSectionScrollProgress, [0, 1], ["-500%", "-200%"]);
+    const thirdSectionSlowScrollTranslation = useTransform(thirdSectionScrollProgress, [0, 1], ["0%", "-100%"]);
+    const thirdSectionWholeScrollTranslation = useTransform(thirdSectionScrollProgress, [0, 1], [0, -300]);
+
+    // Fourth Section
+    const fourthSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
+    const {scrollYProgress: fourthSectionScrollProgress} = useScroll({
+        target: fourthSectionRef,
+        offset: ["start end", "start 20%"]
+    })
+    const fourthSectionImages: Array<StaticImageData> = [
+        AppHomeScreenImage,
+        AppHomeScreenImage,
+        AppHomeScreenImage,
+        AppHomeScreenImage,
+    ];
+
+    const fourthSectionText: Array<string> = [
+        "the mentor",
+        "the developer",
+        "the designer",
+        "the advisor",
+        "the gay"
+    ];
 
     return (
         <section className={`w-screen relative bg-black overflow-y-auto`}>
@@ -326,17 +360,35 @@ const FeatureScreen = (): React.JSX.Element => {
 
                     <div style={{marginTop: "3rem"}} className={`flex flex-wrap gap-[0.5rem] w-[65%]`}>
                         {firstSectionTags.map((item: string, index: number): React.JSX.Element => {
-                            return <motion.div whileHover={{
-                                scale: 1.1,
-                                marginInline: "1rem",
-                                cursor: "default",
-                                background: ApplicationLinearGradient.current.appThanosGradient
-                            }} style={{
-                                background: ApplicationLinearGradient.current.appRedGradient,
-                                paddingBlock: "0.75rem",
-                                paddingInline: "1rem",
-                                borderRadius: "100px"
-                            }} className={`text-[1rem] font-bold text-white`} key={index}>{item}</motion.div>
+                            const chipTranslation = useTransform(firstSectionScrollProgress, [0, 1], [100 * (index + 1), 0]);
+                            // @ts-ignore
+                            const springChipTranslation = useSpring(chipTranslation, {
+                                stiffness: 150,
+                                mass: 0.5,
+                                damping: 20,
+                                ease: [0, 0.55, 0.45, 1],
+                            });
+                            const chipBlur = useTransform(firstSectionScrollProgress, [0, 0.8], ["blur(5px)", "blur(0px)"]);
+                            return (
+                                <motion.div
+                                    whileHover={{
+                                        scale: 1.1,
+                                        marginInline: "1rem",
+                                        cursor: "default",
+                                        background: ApplicationLinearGradient.current.appThanosGradient
+                                    }}
+                                    style={{
+                                        background: ApplicationLinearGradient.current.appRedGradient,
+                                        paddingBlock: "0.75rem",
+                                        paddingInline: "1rem",
+                                        borderRadius: "100px",
+                                        y: springChipTranslation,
+                                        filter: chipBlur,
+                                    }}
+                                    className={`text-[1rem] font-bold text-white`} key={index}>
+                                    {item}
+                                </motion.div>
+                            )
                         })}
                     </div>
                 </div>
@@ -464,21 +516,85 @@ const FeatureScreen = (): React.JSX.Element => {
 
 
             {/*third section */}
-
             <motion.section
-                data-scroll
-                data-scroll-speed={"0.25"}
                 ref={thirdSectionRef}
-                className={`h-screen w-screen flex flex-col bg-blue-300`}>
+                style={{y: thirdSectionWholeScrollTranslation}}
+                className={`h-screen w-screen flex overflow-hidden`}>
 
-                {/*third section marquee*/}
+                <motion.div
+                    style={{y: thirdSectionScrollTranslation}}
+                    className={`flex-1 flex flex-col items-center`}>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                </motion.div>
+
+                <motion.div
+                    style={{y: thirdSectionNegativeScrollTranslation}}
+                    className={`h-full flex-1`}>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                </motion.div>
+
+                <motion.div
+                    style={{y: thirdSectionSlowScrollTranslation}}
+                    className={`h-full flex-1`}>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                    <IphoneWithImage withImage={AppHomeScreenImage}/>
+                </motion.div>
 
             </motion.section>
 
 
-
             {/*fourth section*/}
-            <section className={`h-screen w-screen bg-red-300`}>
+            <section ref={fourthSectionRef}
+                     style={{background: ApplicationLinearGradient.current.appBackgroundInverted}}
+                     className={`h-screen w-screen flex flex-col justify-center items-center`}>
+
+                <motion.div className={`w-full h-full flex flex-col justify-center items-center`}>
+                    {fourthSectionText.map((item: string, index: number): React.JSX.Element => {
+                        const headingScale = useTransform(fourthSectionScrollProgress, [0, 1], [0.05 * (index + 1),1]);
+                        const springHeadingScale = useSpring(headingScale, springOptions);
+
+                        const headingTranslation = useTransform(fourthSectionScrollProgress, [0, 1], [600 * (index + 1),0]);
+                        const springHeadingTranslation = useSpring(headingTranslation, springOptions);
+                        return (
+                            <motion.div
+                                style={{ paddingInline: "2rem", scale: springHeadingScale, x: springHeadingTranslation }}
+                                className={`flex-1 w-full flex justify-between items-center text-white`}
+                                key={index}>
+                                <h1 style={{ lineHeight: 1, letterSpacing: "-5px"}} className={`oswaldBold text-[12rem] uppercase`}>
+                                    {item}
+                                </h1>
+                            </motion.div>
+                        )
+                    })}
+                </motion.div>
+
+            </section>
+
+
+            {/*fifth section*/}
+            <section style={{ background: ApplicationLinearGradient.current.appBackground }} className={`h-screen w-screen`}>
 
             </section>
 
