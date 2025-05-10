@@ -1,4 +1,4 @@
-import React from "react";
+import React, {MouseEventHandler} from "react";
 import {ApplicationColor, ApplicationLinearGradient, CurrentSelectedScreenType} from "@/app/modules/ApplicationHelper";
 import {AnimatePresence, motion, useScroll, useSpring, useTransform} from "framer-motion";
 import Image, {StaticImageData} from "next/image";
@@ -302,6 +302,7 @@ const FeatureScreen = (): React.JSX.Element => {
     const thirdSectionWholeScrollTranslation = useTransform(thirdSectionScrollProgress, [0, 1], [0, -300]);
 
     // Fourth Section
+    const [isFourthSectionHovered, setFourthSectionHovered] = React.useState<boolean>(false);
     const fourthSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
     const {scrollYProgress: fourthSectionScrollProgress} = useScroll({
         target: fourthSectionRef,
@@ -322,10 +323,15 @@ const FeatureScreen = (): React.JSX.Element => {
         "the gay"
     ];
 
+    const [fourthSectionMousePosition, setFourthSectionMousePosition] = React.useState<{ x: number, y: number }>({
+        x: 0,
+        y: 0
+    });
+
+    console.log(fourthSectionMousePosition);
+
     return (
         <section className={`w-screen relative bg-black overflow-y-auto`}>
-
-
             {/*first seciont*/}
             <section ref={firstSectionRef}
                      className={`w-screen h-screen flex justify-center items-center`}>
@@ -566,23 +572,43 @@ const FeatureScreen = (): React.JSX.Element => {
 
 
             {/*fourth section*/}
-            <section ref={fourthSectionRef}
-                     style={{background: ApplicationLinearGradient.current.appBackgroundInverted}}
-                     className={`h-screen w-screen flex flex-col justify-center items-center`}>
+            <section
+                ref={fourthSectionRef}
+                onMouseOver={() => setFourthSectionHovered(true)}
+                onMouseLeave={() => setFourthSectionHovered(false)}
+                onMouseMove={(e) => {
+                    setFourthSectionMousePosition({x: e.clientX, y: e.clientY});
+                }}
+                // style={{background: ApplicationLinearGradient.current.appBackgroundInverted}}
+                className={`h-screen w-screen flex flex-col justify-center items-center relative`}>
+
+
+                {/*mouse thing*/}
+                <motion.div
+                    animate={{scale: isFourthSectionHovered ? 1 : 0, top: fourthSectionMousePosition.y - (320 / 2), left: fourthSectionMousePosition.x - (320 / 2)}}
+                    transition={{ ease: [0.5, 1, 1, 1], duration: 0.5}}
+                    className={`fixed flex gap-[1rem] z-[100] pointer-events-none`}>
+                    <div style={{background: ApplicationLinearGradient.current.appThanosGradient}}
+                         className={`h-[20rem] aspect-square rounded-xl`}>
+
+                    </div>
+                </motion.div>
 
                 <motion.div className={`w-full h-full flex flex-col justify-center items-center`}>
                     {fourthSectionText.map((item: string, index: number): React.JSX.Element => {
-                        const headingScale = useTransform(fourthSectionScrollProgress, [0, 1], [0.05 * (index + 1),1]);
+                        const headingScale = useTransform(fourthSectionScrollProgress, [0, 1], [0.05 * (index + 1), 1]);
                         const springHeadingScale = useSpring(headingScale, springOptions);
 
-                        const headingTranslation = useTransform(fourthSectionScrollProgress, [0, 1], [600 * (index + 1),0]);
+                        const headingTranslation = useTransform(fourthSectionScrollProgress, [0, 1], [600 * (index + 1), 0]);
                         const springHeadingTranslation = useSpring(headingTranslation, springOptions);
                         return (
                             <motion.div
-                                style={{ paddingInline: "2rem", scale: springHeadingScale, x: springHeadingTranslation }}
+                                whileHover={{ background: ApplicationLinearGradient.current.appRedGradient, color: "white", cursor: "default"}}
+                                style={{paddingInline: "2rem", scale: springHeadingScale, x: springHeadingTranslation, background: "transparent"}}
                                 className={`flex-1 w-full flex justify-between items-center text-white`}
                                 key={index}>
-                                <h1 style={{ lineHeight: 1, letterSpacing: "-5px"}} className={`oswaldBold text-[12rem] uppercase`}>
+                                <h1 style={{lineHeight: 1, letterSpacing: "-5px"}}
+                                    className={`oswaldBold text-[12rem] uppercase`}>
                                     {item}
                                 </h1>
                             </motion.div>
@@ -594,7 +620,10 @@ const FeatureScreen = (): React.JSX.Element => {
 
 
             {/*fifth section*/}
-            <section style={{ background: ApplicationLinearGradient.current.appBackground }} className={`h-screen w-screen`}>
+            <section
+                style={{background: ApplicationLinearGradient.current.appBackground}}
+                className={`h-screen w-screen relative`}>
+
 
             </section>
 

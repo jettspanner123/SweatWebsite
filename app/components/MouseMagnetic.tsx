@@ -32,7 +32,7 @@ export default function MouseMagnetic({children}: MouseMagneticProps): React.JSX
             onMouseLeave={mouseLeaveHandler}
             ref={elementRef}
             animate={{ x: mousePosition.x, y: mousePosition.y }}
-            transition={{ mass: 2 }}
+            transition={{ mass: 3, stiffness: 50, duration: 0.4 }}
         >
             {children}
         </motion.div>
