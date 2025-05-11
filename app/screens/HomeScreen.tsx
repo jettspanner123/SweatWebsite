@@ -303,6 +303,7 @@ const FeatureScreen = (): React.JSX.Element => {
 
     // Fourth Section
     const [isFourthSectionHovered, setFourthSectionHovered] = React.useState<boolean>(false);
+    const [currentSelectedImage, setCurrentSelectedImage] = React.useState<number>(0);
     const fourthSectionRef: React.RefObject<HTMLElement | null> = React.useRef(null);
     const {scrollYProgress: fourthSectionScrollProgress} = useScroll({
         target: fourthSectionRef,
@@ -585,13 +586,31 @@ const FeatureScreen = (): React.JSX.Element => {
 
                 {/*mouse thing*/}
                 <motion.div
-                    animate={{scale: isFourthSectionHovered ? 1 : 0, top: fourthSectionMousePosition.y - (320 / 2), left: fourthSectionMousePosition.x - (320 / 2)}}
-                    transition={{ ease: [0.5, 1, 1, 1], duration: 0.3}}
-                    className={`fixed flex gap-[1rem] z-[100] pointer-events-none`}>
-                    <div style={{background: ApplicationLinearGradient.current.appThanosGradient}}
-                         className={`h-[20rem] aspect-square rounded-xl`}>
+                    animate={{
+                        scale: isFourthSectionHovered ? 1 : 0,
+                        top: fourthSectionMousePosition.y - (320 / 2),
+                        left: fourthSectionMousePosition.x - (320 / 2)
+                    }}
+                    transition={{ease: [0.25, 1, 1, 1], duration: 0.5}}
+                    style={{background: ApplicationLinearGradient.current.appThanosGradient}}
+                    className={`fixed z-[100] pointer-events-none h-[20rem] aspect-square rounded-2xl overflow-hidden`}>
 
-                    </div>
+                    <motion.div
+                        animate={{
+                            transform: `translate(0, ${currentSelectedImage * -20}rem)`
+                        }}
+                        style={{height: `${fourthSectionImages.length * 100}%`}} className={`w-full rounded-2xl`}>
+                        {fourthSectionImages.map((item: StaticImageData, index: number): React.JSX.Element => {
+                            return (
+                                <div
+                                    className={`h-[20rem] aspect-square oswaldBold text-white text-[10rem] bg-blue-300 flex justify-center items-center`}
+                                    key={index}>
+                                    {index}
+                                </div>
+                            )
+                        })}
+                    </motion.div>
+
                 </motion.div>
 
                 <motion.div className={`w-full h-full flex flex-col justify-center items-center`}>
@@ -603,12 +622,22 @@ const FeatureScreen = (): React.JSX.Element => {
                         const springHeadingTranslation = useSpring(headingTranslation, springOptions);
                         return (
                             <motion.div
-                                whileHover={{ background: ApplicationLinearGradient.current.appRedGradient, color: "white", cursor: "default"}}
-                                style={{paddingInline: "2rem", scale: springHeadingScale, x: springHeadingTranslation, background: "transparent"}}
+                                onMouseOver={() => setCurrentSelectedImage(index)}
+                                whileHover={{
+                                    background: ApplicationLinearGradient.current.appRedGradient,
+                                    color: "white",
+                                    cursor: "default"
+                                }}
+                                style={{
+                                    paddingInline: "2rem",
+                                    scale: springHeadingScale,
+                                    x: springHeadingTranslation,
+                                    background: "transparent"
+                                }}
                                 className={`flex-1 w-full flex justify-between items-center text-white`}
                                 key={index}>
                                 <h1 style={{lineHeight: 1, letterSpacing: "-5px"}}
-                                    className={`oswaldBold text-[12rem] uppercase`}>
+                                    className={`oswaldBold text-[11rem] uppercase`}>
                                     {item}
                                 </h1>
                             </motion.div>
