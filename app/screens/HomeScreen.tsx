@@ -586,7 +586,7 @@ const FeatureScreen = (): React.JSX.Element => {
                 {/*mouse thing*/}
                 <motion.div
                     animate={{scale: isFourthSectionHovered ? 1 : 0, top: fourthSectionMousePosition.y - (320 / 2), left: fourthSectionMousePosition.x - (320 / 2)}}
-                    transition={{ ease: [0.5, 1, 1, 1], duration: 0.5}}
+                    transition={{ ease: [0.5, 1, 1, 1], duration: 0.3}}
                     className={`fixed flex gap-[1rem] z-[100] pointer-events-none`}>
                     <div style={{background: ApplicationLinearGradient.current.appThanosGradient}}
                          className={`h-[20rem] aspect-square rounded-xl`}>
@@ -621,7 +621,7 @@ const FeatureScreen = (): React.JSX.Element => {
 
             {/*fifth section*/}
             <section
-                style={{background: ApplicationLinearGradient.current.appBackground}}
+                style={{background: ApplicationLinearGradient.current.appBackgroundInverted}}
                 className={`h-screen w-screen relative`}>
 
 
