@@ -258,8 +258,10 @@ const FeatureScreen = (): React.JSX.Element => {
         target: firstSectionRef,
         offset: ["start 80%", "start 25%"]
     })
-    const firstSectionIphoneTranslation = useTransform(firstSectionScrollProgress, [0, 1], [800, 0]);
-    const firstSectionHeadingIconTranslation = useTransform(firstSectionScrollProgress, [0, 1], [-370, 0]);
+    const rawFirstSectionIphoneTranslation = useTransform(firstSectionScrollProgress, [0, 1], [800, 0]);
+    const firstSectionIphoneTranslation = useSpring(rawFirstSectionIphoneTranslation, springOptions);
+    const rawFirstSectionHeadingIconTranslation = useTransform(firstSectionScrollProgress, [0, 1], [-370, 0]);
+    const firstSectionHeadingIconTranslation = useSpring(rawFirstSectionHeadingIconTranslation, springOptions);
     const firstSectionText: string = "We’ve built a feature-packed workout and diet application for iOS to help users achieve their fitness goals with ease. It offers personalized workout plans, diet tracking, progress monitoring, and daily reminders. Designed for all fitness levels, our app makes staying healthy simple, engaging, and effective.";
     const firstSectionTags: Array<string> = [
         "#Healthy",
@@ -278,11 +280,42 @@ const FeatureScreen = (): React.JSX.Element => {
         target: secondSectionRef,
         offset: ["start end", "start 25%"]
     })
-    const secondSectionHeadingIconTranslation = useTransform(secondSectionScrollProgress, [0, 1], [370, 0]);
+    const rawSecondSectionHeadingIconTranslation = useTransform(secondSectionScrollProgress, [0, 1], [370, 0]);
+    const secondSectionHeadingIconTranslation = useSpring(rawSecondSectionHeadingIconTranslation, springOptions);
+    const secondSectionHeadingImage: Array<StaticImageData> = [
+        HomeImage,
+        WorkoutImage,
+        DietImage
+    ]
     const secondSectionTexts: Array<string> = [
         "The home page is a personalized dashboard showing daily health stats like calories, water intake, and workouts. Simple widgets and a clear layout help users stay on track and organized at a glance.",
         "The Diet page simplifies nutrition tracking with a smart food scanner that instantly shows calories and macros. Users can log meals, view past entries, and get personalized recommendations to stay on track with their goals.",
+        "The Diet page simplifies nutrition tracking with a smart food scanner that instantly shows calories and macros. Users can log meals, view past entries, and get personalized recommendations to stay on track with their goals.",
     ];
+    const secondSectionBulletHeading: Array<string> = [
+        "Home Screen",
+        "Workout Screen",
+        "Diet Screen",
+    ];
+
+    const secondSectionBulletPoints: Array<Array<string>> = [
+        [
+            "Informative Widgets",
+            "Daily Summery",
+            "Agendas",
+        ],
+        [
+            "Customised Workouts",
+            "Challenges With Points",
+            "Informative Exercise Of The Day Widgets"
+        ],
+        [
+            "AI Food Scanner",
+            "Food Recommendations According To Regions",
+            "Calories & Macro Nutrient Tracker",
+        ],
+    ];
+
     const secondSectionImages: Array<StaticImageData> = [AppHomeScreenImage, AppWorkoutScreenImage, AppDietScreenImage, AppProfileScreenImage];
 
 
@@ -293,9 +326,6 @@ const FeatureScreen = (): React.JSX.Element => {
         offset: ["start end", "end start"]
     })
 
-    thirdSectionScrollProgress.on("change", (e) => {
-        console.log(e);
-    })
     const thirdSectionScrollTranslation = useTransform(thirdSectionScrollProgress, [0, 1], ["0%", "-250%"]);
     const thirdSectionNegativeScrollTranslation = useTransform(thirdSectionScrollProgress, [0, 1], ["-500%", "-200%"]);
     const thirdSectionSlowScrollTranslation = useTransform(thirdSectionScrollProgress, [0, 1], ["0%", "-100%"]);
@@ -324,12 +354,11 @@ const FeatureScreen = (): React.JSX.Element => {
         "the gay"
     ];
 
+
     const [fourthSectionMousePosition, setFourthSectionMousePosition] = React.useState<{ x: number, y: number }>({
         x: 0,
         y: 0
     });
-
-    console.log(fourthSectionMousePosition);
 
     return (
         <section className={`w-screen relative bg-black overflow-y-auto`}>
@@ -437,12 +466,34 @@ const FeatureScreen = (): React.JSX.Element => {
                     {/*second section heading*/}
                     <div>
                         <div className={`flex gap-[1rem]  items-center relative justify-end`}>
-                            <motion.div style={{
-                                background: ApplicationLinearGradient.current.appRedGradient,
-                                x: secondSectionHeadingIconTranslation
-                            }} className={`h-[3.5rem] aspect-square flex justify-center items-center rounded-full`}>
-                                <Image src={HomeImage} alt={""} className={`scale-75`}/>
-                            </motion.div>
+                            <AnimatePresence mode={"wait"}>
+                                <motion.div
+                                    key={currentSelectedScreen}
+                                    animate={{
+                                        rotate: 0,
+                                        scale: 1,
+                                        filter: "blur(0px)"
+                                    }}
+                                    initial={{
+                                        rotate: -90,
+                                        scale: 0,
+                                        filter: "blur(10px)"
+                                    }}
+                                    exit={{
+                                        rotate: -90,
+                                        scale: 0,
+                                        filter: "blur(10px)"
+                                    }}
+                                    style={{
+                                        background: currentSelectedScreen === 0 ? ApplicationLinearGradient.current.appThanosGradient : currentSelectedScreen === 1 ? ApplicationLinearGradient.current.appRedGradient : currentSelectedScreen === 2 ? ApplicationLinearGradient.current.appGreenGradient : ApplicationLinearGradient.current.appBlueGradientInverted,
+                                        x: secondSectionHeadingIconTranslation
+                                    }}
+                                    className={`h-[3.5rem] aspect-square flex justify-center items-center rounded-full`}>
+                                    <Image src={secondSectionHeadingImage[currentSelectedScreen]} alt={""}
+                                           className={`scale-75`}/>
+                                </motion.div>
+                            </AnimatePresence>
+
                             <motion.h1 style={{
                                 transformOrigin: "left center",
                                 x: secondSectionHeadingIconTranslation
@@ -455,7 +506,7 @@ const FeatureScreen = (): React.JSX.Element => {
                         {/*second section text*/}
                         <AnimatePresence mode="wait">
                             <motion.h1
-                                key={currentSelectedScreen} // Important: key triggers re-mount
+                                key={currentSelectedScreen}
                                 style={{marginTop: "1rem"}}
                                 className="text-[1.25rem] text-white text-right flex"
                                 initial={{opacity: 0, y: 10, filter: "blur(10px)"}}
@@ -466,14 +517,57 @@ const FeatureScreen = (): React.JSX.Element => {
                                 {secondSectionTexts[currentSelectedScreen]}
                             </motion.h1>
                         </AnimatePresence>
+
+
+                        <AnimatePresence mode={"wait"}>
+                            <motion.h1
+                                key={currentSelectedScreen}
+                                animate={{x: 0}}
+                                initial={{x: 500}}
+                                exit={{x: 500}}
+                                style={{marginTop: "4rem"}}
+                                transition={{duration: 0.5, ease: [0.85, 0, 0.15, 1]}}
+                                className={`text-right text-white oswaldBold text-[3rem] relative`}>
+                                {secondSectionBulletHeading[currentSelectedScreen]}
+
+                            </motion.h1>
+                        </AnimatePresence>
+
+
+                        <div className={`h-[0.25rem] w-full bg-white/50 rounded-full`}/>
+
+                        <AnimatePresence mode={"wait"}>
+                            {secondSectionBulletPoints[currentSelectedScreen].map((item: string, index: number): React.JSX.Element => {
+                                return (
+                                    <motion.div
+                                        key={`${currentSelectedScreen}-${index}`}
+                                        animate={{scaleY: 1, y: 0, filter: "blur(0)"}}
+                                        initial={{scaleY: 0, y: -56 * index, filter: "blur(10px)"}}
+                                        exit={{scaleY: 0, y: -56 * index, filter: "blur(10px)"}}
+                                        transition={{duration: 0.5, ease: [0.85, 0, 0.15, 1]}}
+                                        whileHover={{
+                                            backgroundColor: "rgba(255,255,255,0.5)",
+                                            color: "white",
+                                            cursor: "pointer"
+                                        }}
+                                        className={`w-full bg-white/10 text-right text-white`}>
+                                        <li
+                                            style={{
+                                                marginTop: "0.25rem",
+                                                paddingBlock: "0.5rem",
+                                                paddingInline: "1rem"
+                                            }}
+                                            className={`text-[1.5rem] list-none`}>{item}</li>
+                                    </motion.div>
+                                )
+                            })}
+                        </AnimatePresence>
                     </div>
 
 
                     {/*twin right and left button*/}
                     <div style={{marginBottom: "10rem"}} className={`w-full h-[2rem] flex justify-end items-center`}>
                         <div className={`flex gap-[1rem]`}>
-
-
                             {/*left button*/}
                             <AnimatePresence>
                                 {currentSelectedScreen !== 0 && (
@@ -510,7 +604,6 @@ const FeatureScreen = (): React.JSX.Element => {
                                     }
                                 }}
                                 className={`flex justify-center items-center h-[5rem] aspect-square border-[1px] border-white/20 rounded-full`}>
-
                                 {currentSelectedScreen < secondSectionTexts.length ?
                                     <FaChevronRight color={"rgba(255,255,255,0.5)"}/> :
                                     <RxCross1 color={"rgba(255,255,255,0.5)"}/>}
