@@ -1,5 +1,5 @@
-import React, {MouseEventHandler} from "react";
-import {ApplicationColor, ApplicationLinearGradient, CurrentSelectedScreenType} from "@/app/modules/ApplicationHelper";
+import React from "react";
+import {ApplicationLinearGradient, CurrentSelectedScreenType} from "@/app/modules/ApplicationHelper";
 import {AnimatePresence, motion, useScroll, useSpring, useTransform} from "framer-motion";
 import Image, {StaticImageData} from "next/image";
 import PrimaryButtonWithIcon from "@/app/components/PrimaryButton";
@@ -26,6 +26,7 @@ import AppHomeScreenImage from "@/app/assets/app_home.jpeg";
 import AppWorkoutScreenImage from "@/app/assets/workout_screen.png";
 import AppDietScreenImage from "@/app/assets/diet_screen.png";
 import AppProfileScreenImage from "@/app/assets/diet_screen.png";
+import useDimention from "@/app/components/DimentionHook";
 
 
 interface HomeScreenProps {
@@ -344,20 +345,20 @@ const FeatureScreen = (): React.JSX.Element => {
         AppHomeScreenImage,
         AppHomeScreenImage,
         AppHomeScreenImage,
+        AppHomeScreenImage,
     ];
 
     const fourthSectionText: Array<string> = [
-        "the mentor",
-        "the developer",
-        "the designer",
-        "the advisor",
-        "the gay"
+        "the mentor~Sharan Maam",
+        "the developer~Uddeshya Singh",
+        "the designer~Suvogyan Chakraborty",
+        "the advisor~Om Tomar",
+        "the gay~Soham Chakraborty"
     ];
-
 
     const [fourthSectionMousePosition, setFourthSectionMousePosition] = React.useState<{ x: number, y: number }>({
         x: 0,
-        y: 0
+        y: 0,
     });
 
     return (
@@ -708,11 +709,14 @@ const FeatureScreen = (): React.JSX.Element => {
 
                 <motion.div className={`w-full h-full flex flex-col justify-center items-center`}>
                     {fourthSectionText.map((item: string, index: number): React.JSX.Element => {
-                        const headingScale = useTransform(fourthSectionScrollProgress, [0, 1], [0.05 * (index + 1), 1]);
+                        const headingScale = useTransform(fourthSectionScrollProgress, [0, 0.7], [0.05 * (index + 1), 1]);
                         const springHeadingScale = useSpring(headingScale, springOptions);
 
-                        const headingTranslation = useTransform(fourthSectionScrollProgress, [0, 1], [600 * (index + 1), 0]);
+                        const headingTranslation = useTransform(fourthSectionScrollProgress, [0, 0.7], [600 * (index + 1), 0]);
                         const springHeadingTranslation = useSpring(headingTranslation, springOptions);
+
+                        const role: string = item.split("~")[0];
+                        const name: string = item.split("~")[1];
                         return (
                             <motion.div
                                 onMouseOver={() => setCurrentSelectedImage(index)}
@@ -722,16 +726,20 @@ const FeatureScreen = (): React.JSX.Element => {
                                     cursor: "default"
                                 }}
                                 style={{
-                                    paddingInline: "2rem",
+                                    paddingInline: "9rem",
                                     scale: springHeadingScale,
-                                    x: springHeadingTranslation,
+                                    y: springHeadingTranslation,
                                     background: "transparent"
                                 }}
-                                className={`flex-1 w-full flex justify-between items-center text-white`}
+                                className={`flex-1 w-full flex justify-between poppins-light items-center text-white`}
                                 key={index}>
                                 <h1 style={{lineHeight: 1, letterSpacing: "-5px"}}
-                                    className={`oswaldBold text-[11rem] uppercase`}>
-                                    {item}
+                                    className={`oswaldBold text-[9rem] uppercase`}>
+                                    {role}
+                                </h1>
+
+                                <h1 style={{lineHeight: 1, letterSpacing: "0px"}} className={`text-[2rem] `}>
+                                    {name}
                                 </h1>
                             </motion.div>
                         )
@@ -753,11 +761,7 @@ const FeatureScreen = (): React.JSX.Element => {
     )
 }
 
-interface ImageWithImageProps {
-    withImage: StaticImageData;
-}
-
-const IphoneWithImage = ({withImage}: ImageWithImageProps) => {
+const IphoneWithImage = ({withImage}: { withImage: StaticImageData }) => {
     return (
         <motion.div style={{height: 1000, width: 550}} className={`relative`}>
             <Image src={IphoneImage} alt={""} style={{scale: 1.3}}
