@@ -26,7 +26,6 @@ import AppHomeScreenImage from "@/app/assets/app_home.jpeg";
 import AppWorkoutScreenImage from "@/app/assets/workout_screen.png";
 import AppDietScreenImage from "@/app/assets/diet_screen.png";
 import AppProfileScreenImage from "@/app/assets/diet_screen.png";
-import useDimention from "@/app/components/DimentionHook";
 
 
 interface HomeScreenProps {
@@ -62,7 +61,7 @@ export default function HomeScreen({
         offset: ["end end", "end start"]
     })
 
-    const iphoneYTransformation = useTransform(firstSectionScrollProgress, [0, 1], ["translate(0, 0)", "translate(0, 100%)"]);
+    const iphoneYTransformation: MotionValue<string> = useTransform(firstSectionScrollProgress, [0, 1], ["translate(0, 0)", "translate(0, 100%)"]);
 
 
     return (
