@@ -120,7 +120,11 @@ export default function HomeScreen({
                                             transition={{duration: 1, ease: [0.87, 0, 0.13, 1], delay: 0.5}}
                                             style={{background: ApplicationLinearGradient.current.appRedGradient}}
                                             className={`h-[6rem] aspect-square rounded-full flex justify-center items-center`}>
-                                    <Image src={WorkoutImage} alt={""} className={`scale-75`}/>
+                                    <MouseMagnetic>
+                                        <div className={`h-[6rem] aspect-square flex justify-center items-center`}>
+                                            <Image src={WorkoutImage} alt={""} className={`scale-75`}/>
+                                        </div>
+                                    </MouseMagnetic>
                                 </motion.div>
                             </motion.div>
                         </MouseMagnetic>
@@ -133,7 +137,11 @@ export default function HomeScreen({
                                             transition={{duration: 1, ease: [0.87, 0, 0.13, 1], delay: 0.75}}
                                             style={{background: ApplicationLinearGradient.current.appGreenGradient}}
                                             className={`h-[6rem] aspect-square rounded-full flex justify-center items-center`}>
-                                    <Image src={DietImage} alt={""} className={`scale-75`}/>
+                                    <MouseMagnetic>
+                                        <div className={`h-[6rem] aspect-square flex justify-center items-center`}>
+                                            <Image src={DietImage} alt={""} className={`scale-75`}/>
+                                        </div>
+                                    </MouseMagnetic>
                                 </motion.div>
                             </motion.div>
                         </MouseMagnetic>

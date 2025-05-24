@@ -23,6 +23,16 @@ export default function Page(): React.JSX.Element {
                     {/*bac button*/}
                     <motion.div
                         onClick={() => pushRoute("/")}
+                        animate={{
+                            scale: 1
+                        }}
+                        initial={{
+                            scale: 0
+                        }}
+                        transition={{
+                            duration: 1,
+                            ease: [0.85, 0, 0.15, 1]
+                        }}
                         whileHover={{scale: 1.1, cursor: "pointer"}}
                         className={`bg-white h-[4rem] w-[8rem] overflow-hidden rounded-full`}>
                         <MouseMagnetic>
@@ -57,9 +67,17 @@ export default function Page(): React.JSX.Element {
 
 
                     {/*the contact us button*/}
-
-                    <motion.div whileHover={{scale: 1.1, cursor: "pointer"}}
-                                className={`text-white overflow-hidden border-[1px] border-white h-[4rem] w-[8rem] rounded-full`}>
+                    <motion.div
+                        animate={{scale: 1}}
+                        initial={{scale: 0}}
+                        transition={{
+                            duration: 1,
+                            delay: 0.15,
+                            ease: [0.85, 0, 0.15, 1]
+                        }}
+                        whileHover={{scale: 1.1, cursor: "pointer"}}
+                        onClick={() => pushRoute("/contactUs")}
+                        className={`text-white overflow-hidden border-[1px] border-white h-[4rem] w-[8rem] rounded-full`}>
                         <MouseMagnetic>
                             <div
                                 className={`h-[4rem] pointer-events-none w-[8rem] gap-[0.5rem] flex justify-center items-center`}>
@@ -71,49 +89,79 @@ export default function Page(): React.JSX.Element {
 
 
                 {/*red banner*/}
-                <div style={{
-                    background: ApplicationLinearGradient.current.appRedGradient,
-                    marginInline: "auto",
-                    marginTop: "2rem",
-                    padding: "1.5rem"
-                }} className={`w-[70vw] flex justify-center items-center text-white rounded-2xl text-[1.25rem]`}>
+                <motion.div
+                    animate={{scaleY: 1}}
+                    initial={{scaleY: 0}}
+                    transition={{
+                        duration: 1,
+                        delay: 0.25,
+                        ease: [0.85, 0, 0.15, 1]
+                    }}
+                    style={{
+                        background: ApplicationLinearGradient.current.appRedGradient,
+                        marginInline: "auto",
+                        marginTop: "2rem",
+                        padding: "1.5rem",
+                        transformOrigin: "top center"
+                    }} className={`w-[70vw] flex justify-center items-center text-white rounded-2xl text-[1.25rem]`}>
                     The Privacy Policy will help you better understand how we collect, use and share you personal
                     information.
-                </div>
+                </motion.div>
 
 
                 {/*actual privacy Policy*/}
                 <div style={{marginInline: "auto"}} className={`w-[70vw]`}>
 
                     {/*date of privacy policy*/}
-                    <h1 style={{marginTop: "2rem"}}
+                    <motion.h1
+                        style={{marginTop: "2rem"}}
                         className={`text-white text-[1.25rem] flex gap-[1rem] items-center`}>
-                        <div style={{
-                            background: ApplicationLinearGradient.current.appThanosGradient,
-                            padding: "0.5rem",
-                            paddingInline: "1rem"
-                        }} className={`rounded-xl`}>
+                        <motion.div
+                            animate={{scale: 1}}
+                            initial={{scale: 0}}
+                            transition={{
+                                duration: 1,
+                                delay: 0.3,
+                                ease: [0.85, 0, 0.15, 1]
+                            }}
+                            style={{
+                                background: ApplicationLinearGradient.current.appThanosGradient,
+                                padding: "0.5rem",
+                                paddingInline: "1rem"
+                            }} className={`rounded-xl`}>
                             Effective Date
-                        </div>
+                        </motion.div>
 
-                        24th of April, 2025
-                    </h1>
+                        <motion.span className={`inline-block`} animate={{opacity: 1}} initial={{opacity: 0}}
+                                     transition={{duration: 1, delay: 0.3}}>
+                            24th of April, 2025
+                        </motion.span>
+                    </motion.h1>
 
                     {/*small privacy policy description*/}
-                    <h1 style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                    <motion.h1
+                        animate={{opacity: 1}} initial={{opacity: 0}}
+                        transition={{duration: 1, delay: 0.35}} style={{marginTop: "1rem"}}
+                        className={`text-white text-[1.25rem]`}>
                         Welcome to <span className={`font-bold`}> Sweat If </span> We value your privacy and are
                         committed to protecting your personal
                         information. This Privacy Policy outlines how we collect, use, store, and protect the data you
                         provide while using our workout, fitness, and diet application, which includes AI-powered
                         features to personalize and enhance your experience.
-                    </h1>
+                    </motion.h1>
 
                     <div style={{marginTop: "2rem"}}>
-                        <PaddedBackgroundText text={"1. Information We Collect"}
-                                              background={ApplicationLinearGradient.current.appThanosGradient}/>
+                        <PaddedBackgroundText
+                            text={"1. Information We Collect"}
+                            background={ApplicationLinearGradient.current.appThanosGradient}
+                            delay={0.4}
+                        />
 
                         <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
-                            We may collection the following types of information:
+                            <motion.span animate={{opacity: 1}} initial={{opacity: 0}}
+                                         transition={{duration: 1, delay: 0.3}}>
+                                We may collection the following types of information:
+                            </motion.span>
 
                             <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
                                 <PaddedBackgroundText
@@ -121,9 +169,15 @@ export default function Page(): React.JSX.Element {
                                     background={ApplicationLinearGradient.current.appBlueGradientInverted}
                                     wantRightMargin={true}
                                     fixedWidth={true}
+                                    delay={0.9}
                                 />
-                                Name, email address, age, gender, weight, height, fitness goals, and dietary
-                                preferences.
+                                <motion.span
+                                    animate={{opacity: 1}} initial={{opacity: 0}} transition={{duration: 1, delay: 0.8}}
+                                >
+                                    Name, email address, age, gender, weight, height, fitness goals, and dietary
+                                    preferences.
+                                </motion.span>
+
                             </div>
 
                             <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
@@ -132,9 +186,15 @@ export default function Page(): React.JSX.Element {
                                     background={ApplicationLinearGradient.current.appBlueGradientInverted}
                                     wantRightMargin={true}
                                     fixedWidth={true}
+                                    delay={0.3}
                                 />
-                                Workout history, activity levels, food logs, water intake, sleep patterns, and progress
-                                metrics.
+                                <motion.span
+                                    animate={{opacity: 1}} initial={{opacity: 0}} transition={{duration: 1, delay: 0.2}}
+                                >
+                                    Workout history, activity levels, food logs, water intake, sleep patterns, and
+                                    progress
+                                    metrics.
+                                </motion.span>
                             </div>
 
                             <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
@@ -143,8 +203,14 @@ export default function Page(): React.JSX.Element {
                                     background={ApplicationLinearGradient.current.appBlueGradientInverted}
                                     wantRightMargin={true}
                                     fixedWidth={true}
+                                    delay={0.1}
                                 />
-                                Device type, operating system, app version, and usage data.
+                                <motion.span
+                                    animate={{opacity: 1}} initial={{opacity: 0}}
+                                    transition={{duration: 1, delay: 0.76}}
+                                >
+                                    Device type, operating system, app version, and usage data.
+                                </motion.span>
                             </div>
 
                             <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
@@ -154,8 +220,13 @@ export default function Page(): React.JSX.Element {
                                     wantRightMargin={true}
                                     fixedWidth={true}
                                 />
-                                User input related to preferences, goals, and performance that the AI uses to provide
-                                tailored recommendations.
+                                <motion.span
+                                    animate={{opacity: 1}} initial={{opacity: 0}} transition={{duration: 1, delay: 0.1}}
+                                >
+                                    User input related to preferences, goals, and performance that the AI uses to
+                                    provide
+                                    tailored recommendations.
+                                </motion.span>
                             </div>
                         </div>
                     </div>
@@ -166,8 +237,9 @@ export default function Page(): React.JSX.Element {
                         <PaddedBackgroundText
                             text={"2. How We User Your Information"}
                             background={ApplicationLinearGradient.current.appThanosGradient}/>
-
-                        <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                        <motion.div
+                            animate={{opacity: 1}} initial={{opacity: 0}} transition={{duration: 1, delay: 0.3}}
+                            style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
                             We use the information we collect to provide you with a personalized and effective health
                             and fitness experience. This includes generating customized workout routines and diet plans
                             based on your goals and preferences, tracking your progress over time, and offering
@@ -175,7 +247,7 @@ export default function Page(): React.JSX.Element {
                             enhance app performance, deliver motivational messages and reminders, and support your
                             overall health journey. Your information also helps us troubleshoot issues, respond to
                             inquiries, and continuously improve our services.
-                        </div>
+                        </motion.div>
                     </div>
 
 
@@ -303,15 +375,20 @@ type PaddedBackgroundTextProps = {
     background: string;
     wantRightMargin?: boolean;
     fixedWidth?: boolean;
+    delay?: number;
 };
 const PaddedBackgroundText = ({
                                   text,
                                   background,
                                   wantRightMargin = false,
-                                  fixedWidth = false
+                                  fixedWidth = false,
+                                  delay = 0.5
                               }: PaddedBackgroundTextProps): React.JSX.Element => {
     return (
-        <div
+        <motion.div
+            animate={{scale: 1}}
+            initial={{scale: 0}}
+            transition={{duration: 1, delay: delay, ease: [0.85, 0, 0.15, 1]}}
             style={{
                 width: fixedWidth ? "15rem" : "auto",
                 padding: "0.5rem",
@@ -321,6 +398,6 @@ const PaddedBackgroundText = ({
             }}
             className={`text-white inline-block text-[1.25rem] rounded-xl`}>
             {text}
-        </div>
+        </motion.div>
     )
 }

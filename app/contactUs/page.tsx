@@ -1,0 +1,261 @@
+"use client";
+import React from "react";
+import {ApplicationLinearGradient} from "@/app/modules/ApplicationHelper";
+import {AnimatePresence, motion} from "framer-motion";
+import MouseMagnetic from "@/app/components/MouseMagnetic";
+import {FaChevronLeft} from "react-icons/fa";
+
+export default function Page(): React.JSX.Element {
+
+    const [pageChangeState, setPageChangeState] = React.useState<boolean>(false);
+
+
+    const [userName, setUserName] = React.useState<string>("");
+    const [userEmail, setUserEmail] = React.useState<string>("");
+    const [userDescription, setUserDescription] = React.useState<string>("");
+
+    const [showError, setShowError] = React.useState<boolean>(false);
+    const [errorDescription, setErrorDescription] = React.useState<string>("");
+
+    function pushRoute(path: string): void {
+
+        setPageChangeState(true);
+
+        setTimeout(() => {
+            window.location.assign(path);
+        }, 1000);
+    }
+
+    function sendQuestion(): void {
+        if (!userName || !userEmail || !userDescription) {
+            setErrorDescription("Please enter each and every text fields!");
+            setShowError(true);
+
+            setTimeout(() => {
+                setShowError(false);
+                setErrorDescription("");
+            }, 2500);
+            return;
+        }
+
+        if (!(userName.split(" ").length >= 2)) {
+            setErrorDescription("Please enter full name only!");
+            setShowError(true);
+
+            setTimeout(() => {
+                setShowError(false);
+                setErrorDescription("");
+            }, 2500);
+            return;
+        }
+
+        if (!(userEmail.includes("@") && userEmail.includes("."))) {
+            setErrorDescription("Please enter valid email address!");
+            setShowError(true);
+
+            setTimeout(() => {
+                setShowError(false);
+                setErrorDescription("");
+            }, 2500);
+            return;
+        }
+
+
+    }
+
+    return (
+        <React.Fragment>
+            <main style={{background: ApplicationLinearGradient.current.appBackground, paddingBlock: "5rem"}}
+                  className={`min-h-screen w-screen`}>
+                <motion.div
+                    animate={{y: pageChangeState ? "100vh" : "0"}}
+                    transition={{duration: 0.75, ease: [0.85, 0, 0.15, 1]}}
+                    style={{marginInline: "auto"}} className={`w-[70vw]`}>
+
+                    <nav style={{paddingBlock: "1.25rem", marginInline: "auto"}}
+                         className={`w-[70vw] flex justify-between items-center`}>
+
+
+                        {/*bac button*/}
+                        <MouseMagnetic>
+                            <motion.div
+                                animate={{
+                                    scale: 1
+                                }}
+                                initial={{
+                                    scale: 0
+                                }}
+                                transition={{
+                                    duration: 1,
+                                    ease: [0.85, 0, 0.15, 1]
+                                }}
+                                onClick={() => pushRoute("/")}
+                                whileHover={{scale: 1.1, cursor: "pointer"}}
+                                className={`bg-white h-[4rem] w-[8rem] overflow-hidden rounded-full`}>
+                                <MouseMagnetic>
+                                    <div
+                                        className={`h-[4rem] pointer-events-none w-[8rem] gap-[0.5rem] flex justify-center items-center`}>
+                                        <FaChevronLeft/>
+                                        <p className={`cursor-default`}>Home</p>
+                                    </div>
+                                </MouseMagnetic>
+                            </motion.div>
+                        </MouseMagnetic>
+
+                        {/*the privacy policy heading*/}
+                        <h1 className={`text-white oswaldBold text-[4rem] uppercase`}>
+                            {
+                                "Contact-us".split("").map((item: string, index: number): React.JSX.Element => {
+                                    return (
+                                        <motion.span
+                                            animate={{y: 0}} initial={{y: -200}}
+                                            transition={{
+                                                delay: 0.005 * (index + 1),
+                                                ease: [0.16, 1, 0.3, 1],
+                                                duration: 1
+
+                                            }}
+                                            key={index} className={`inline-block`}>
+                                            {item}
+                                        </motion.span>
+                                    )
+                                })
+                            }
+                        </h1>
+
+
+                        {/*the contact us button*/}
+
+                        <MouseMagnetic>
+                            <motion.div
+                                animate={{
+                                    scale: 1
+                                }}
+                                initial={{
+                                    scale: 0
+                                }}
+                                transition={{
+                                    duration: 1,
+                                    ease: [0.85, 0, 0.15, 1],
+                                    delay: 0.15
+                                }}
+                                whileHover={{scale: 1.1, cursor: "pointer"}}
+                                onClick={() => pushRoute("/privacyPolicy")}
+                                className={`text-white border-[1px] border-white h-[4rem] w-[8rem] rounded-full`}>
+                                <MouseMagnetic>
+                                    <div
+                                        className={`h-[4rem] pointer-events-none w-[8rem] gap-[0.5rem] flex justify-center items-center`}>
+                                        Privacy Policy
+                                    </div>
+                                </MouseMagnetic>
+                            </motion.div>
+                        </MouseMagnetic>
+                    </nav>
+
+
+                    <motion.div layout style={{marginTop: "2rem"}} className={`w-full`}>
+
+                        {/*user name text field*/}
+                        <div className={`flex gap-[1rem] w-full`}>
+                            <div className={`flex-1`}>
+                                <motion.h1
+                                    animate={{opacity: 1}}
+                                    initial={{opacity: 0}}
+                                    transition={{
+                                        duration: 1,
+                                    }}
+                                    style={{paddingInline: "0.5rem"}} className={`text-[1.25rem] text-white`}>
+                                    Full Name
+                                </motion.h1>
+                                <motion.input
+                                    animate={{scaleX: 1}}
+                                    initial={{scaleX: 0}}
+                                    transition={{duration: 1, delay: 0.25, ease: [0.85, 0, 0.15, 1]}}
+                                    onChange={(e) => setUserName((e.target.value))}
+                                    value={userName}
+                                    type={"text"}
+                                    style={{padding: "0.75rem", marginTop: "1rem", transformOrigin: "left"}}
+                                    className={`border-[0.5px] border-white rounded-2xl w-full text-white text-[1.25rem]`}
+                                    placeholder={"Name"}
+                                />
+                            </div>
+
+                            {/*email text field*/}
+                            <div className={`flex-1`}>
+                                <div className={`flex-1`}>
+                                    <motion.h1
+                                        animate={{opacity: 1}}
+                                        initial={{opacity: 0}}
+                                        transition={{
+                                            duration: 1,
+                                            delay: 0.2
+                                        }}
+                                        style={{paddingInline: "0.5rem"}} className={`text-[1.25rem] text-white`}>
+                                        Email Address
+                                    </motion.h1>
+                                    <motion.input
+                                        animate={{scaleX: 1}}
+                                        initial={{scaleX: 0}}
+                                        transition={{duration: 1, ease: [0.85, 0, 0.15, 1]}}
+                                        onChange={(e) => setUserEmail(e.target.value)}
+                                        value={userEmail}
+                                        type={"email"}
+                                        style={{padding: "0.75rem", marginTop: "1rem", transformOrigin: "left"}}
+                                        className={`border-[0.5px] border-white rounded-2xl w-full text-white text-[1.25rem]`}
+                                        placeholder={"Address"}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <motion.textarea
+                            animate={{scaleY: 1}}
+                            initial={{scaleY: 0}}
+                            transition={{
+                                duration: 1,
+                                delay: 0.3,
+                                ease: [0.85, 0, 0.15, 1],
+                            }}
+                            style={{marginTop: "1rem", padding: "0.75rem"}}
+                            placeholder={"Tell Us What You Think."}
+                            className={`w-full border-[0.5px] text-[1.25rem] min-h-[15rem] border-white rounded-xl text-white`}
+                            onChange={(e) => setUserDescription(e.target.value)} value={userDescription}>
+
+                        </motion.textarea>
+
+
+
+                        <motion.button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                sendQuestion();
+                            }}
+                            animate={{y: 0}}
+                            initial={{y: 500}}
+                            transition={{duration: 1, ease: [0.85, 0, 0.15, 1], delay: 0.5}}
+                            whileHover={{cursor: "pointer", scaleY: 1.1}} whileTap={{scaleY: 0.9}}
+                            style={{padding: "0.5rem", marginTop: "1rem"}}
+                            className={`w-full bg-white text-black text-[1.25rem] rounded-xl border-none outline-none`}>
+                            Submit
+                        </motion.button>
+                    </motion.div>
+
+                    <AnimatePresence>
+                        {showError && (
+                            <motion.div
+                                animate={{ scaleY: 1, filter: "blur(0)"}}
+                                initial={{ scaleY: 0, filter: "blur(10px)" }}
+                                exit={{ scaleY: 0, filter: "blur(10px)" }}
+                                transition={{ }}
+                                style={{marginBlock: "1rem", background: ApplicationLinearGradient.current.appRedGradient, padding: "0.75rem"}}
+                                className={`flex justify-center items-center text-white rounded-xl`}>
+                                {errorDescription}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                </motion.div>
+            </main>
+        </React.Fragment>
+    )
+}
