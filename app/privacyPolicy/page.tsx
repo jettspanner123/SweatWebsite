@@ -14,7 +14,7 @@ export default function Page(): React.JSX.Element {
         <React.Fragment>
             <main
                 className={`min-h-screen w-screen`}
-                style={{background: ApplicationLinearGradient.current.appBackground, paddingTop: "5rem"}}>
+                style={{background: ApplicationLinearGradient.current.appBackground, paddingBlock: "5rem"}}>
 
                 <nav style={{paddingBlock: "1.25rem", marginInline: "auto"}}
                      className={`w-[70vw] flex justify-between items-center`}>
@@ -108,58 +108,61 @@ export default function Page(): React.JSX.Element {
                         features to personalize and enhance your experience.
                     </h1>
 
-                    <PaddedBackgroundText text={"1. Information We Collect"}
-                                          background={ApplicationLinearGradient.current.appThanosGradient}/>
+                    <div style={{marginTop: "2rem"}}>
+                        <PaddedBackgroundText text={"1. Information We Collect"}
+                                              background={ApplicationLinearGradient.current.appThanosGradient}/>
 
-                    <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
-                        We may collection the following types of information:
+                        <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                            We may collection the following types of information:
 
-                        <div style={{marginLeft: "4rem"}} className={`gap-[0.5rem]`}>
-                            <PaddedBackgroundText
-                                text={"Personal Information"}
-                                background={ApplicationLinearGradient.current.appBlueGradientInverted}
-                                wantRightMargin={true}
-                                fixedWidth={true}
-                            />
-                            Name, email address, age, gender, weight, height, fitness goals, and dietary preferences.
-                        </div>
+                            <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
+                                <PaddedBackgroundText
+                                    text={"Personal Information"}
+                                    background={ApplicationLinearGradient.current.appBlueGradientInverted}
+                                    wantRightMargin={true}
+                                    fixedWidth={true}
+                                />
+                                Name, email address, age, gender, weight, height, fitness goals, and dietary
+                                preferences.
+                            </div>
 
-                        <div style={{marginLeft: "4rem"}} className={`gap-[0.5rem]`}>
-                            <PaddedBackgroundText
-                                text={"Health & Fitness Data"}
-                                background={ApplicationLinearGradient.current.appBlueGradientInverted}
-                                wantRightMargin={true}
-                                fixedWidth={true}
-                            />
-                            Workout history, activity levels, food logs, water intake, sleep patterns, and progress
-                            metrics.
-                        </div>
+                            <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
+                                <PaddedBackgroundText
+                                    text={"Health & Fitness Data"}
+                                    background={ApplicationLinearGradient.current.appBlueGradientInverted}
+                                    wantRightMargin={true}
+                                    fixedWidth={true}
+                                />
+                                Workout history, activity levels, food logs, water intake, sleep patterns, and progress
+                                metrics.
+                            </div>
 
-                        <div style={{marginLeft: "4rem"}} className={`gap-[0.5rem]`}>
-                            <PaddedBackgroundText
-                                text={"Device Information"}
-                                background={ApplicationLinearGradient.current.appBlueGradientInverted}
-                                wantRightMargin={true}
-                                fixedWidth={true}
-                            />
-                            Device type, operating system, app version, and usage data.
-                        </div>
+                            <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
+                                <PaddedBackgroundText
+                                    text={"Device Information"}
+                                    background={ApplicationLinearGradient.current.appBlueGradientInverted}
+                                    wantRightMargin={true}
+                                    fixedWidth={true}
+                                />
+                                Device type, operating system, app version, and usage data.
+                            </div>
 
-                        <div style={{marginLeft: "4rem"}} className={`gap-[0.5rem]`}>
-                            <PaddedBackgroundText
-                                text={"AI Driven Data Inputs"}
-                                background={ApplicationLinearGradient.current.appBlueGradientInverted}
-                                wantRightMargin={true}
-                                fixedWidth={true}
-                            />
-                            User input related to preferences, goals, and performance that the AI uses to provide
-                            tailored recommendations.
+                            <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
+                                <PaddedBackgroundText
+                                    text={"AI Driven Data Inputs"}
+                                    background={ApplicationLinearGradient.current.appBlueGradientInverted}
+                                    wantRightMargin={true}
+                                    fixedWidth={true}
+                                />
+                                User input related to preferences, goals, and performance that the AI uses to provide
+                                tailored recommendations.
+                            </div>
                         </div>
                     </div>
 
 
                     {/*how we use information*/}
-                    <div style={{marginTop: "1rem"}}>
+                    <div style={{marginTop: "3rem"}}>
                         <PaddedBackgroundText
                             text={"2. How We User Your Information"}
                             background={ApplicationLinearGradient.current.appThanosGradient}/>
@@ -177,7 +180,7 @@ export default function Page(): React.JSX.Element {
 
 
                     {/*ai and personaqlization*/}
-                    <div style={{marginTop: "1rem"}}>
+                    <div style={{marginTop: "3rem"}}>
                         <PaddedBackgroundText
                             text={"3. AI And Personalisation"}
                             background={ApplicationLinearGradient.current.appThanosGradient}/>
@@ -188,6 +191,106 @@ export default function Page(): React.JSX.Element {
                             experience. This data is never sold or shared with third-party advertisers.
                         </div>
                     </div>
+
+
+                    {/*data sharing and third parties*/}
+                    <div style={{marginTop: "3rem"}}>
+                        <PaddedBackgroundText
+                            text={"4. Data Sharing And Third Parties"}
+                            background={ApplicationLinearGradient.current.appThanosGradient}/>
+
+                        <h1 style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                            We do not sell your personal data. We may share data with:
+                        </h1>
+                        <div style={{marginLeft: "4rem"}}>
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <PaddedBackgroundText text={"Cloud providers for secure storage."}
+                                                      background={ApplicationLinearGradient.current.appRedGradient}/>
+                            </div>
+
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <PaddedBackgroundText
+                                    text={"Analytics services to improve app performance (anonymized data only)."}
+                                    background={ApplicationLinearGradient.current.appRedGradient}/>
+                            </div>
+
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <PaddedBackgroundText
+                                    text={"Healthcare integrations (only if you explicitly authorize)."}
+                                    background={ApplicationLinearGradient.current.appRedGradient}/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {/*data security*/}
+                    <div style={{marginTop: "3rem"}} className={`text-white text-[1.25rem]`}>
+                        <PaddedBackgroundText
+                            text={"5. Data Security"}
+                            background={ApplicationLinearGradient.current.appThanosGradient}/>
+                        <div style={{marginTop: "1rem"}}>
+                            We implement strong security measures including encryption, secure storage, and limited
+                            access
+                            to protect your information.
+                        </div>
+
+                    </div>
+
+                    {/*Your RIghts*/}
+                    <div style={{marginTop: "3rem"}}>
+                        <PaddedBackgroundText
+                            text={"6. Your Rights"}
+                            background={ApplicationLinearGradient.current.appThanosGradient}/>
+
+                        <h1 style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                            You have the right to:
+                        </h1>
+                        <div style={{marginLeft: "4rem"}}>
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <PaddedBackgroundText text={"Access or update your personal data."}
+                                                      background={ApplicationLinearGradient.current.appRedGradient}/>
+                            </div>
+
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <PaddedBackgroundText
+                                    text={"Delete your account and associated data."}
+                                    background={ApplicationLinearGradient.current.appRedGradient}/>
+                            </div>
+
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <PaddedBackgroundText
+                                    text={"Withdraw consent for data processing."}
+                                    background={ApplicationLinearGradient.current.appRedGradient}/>
+                            </div>
+
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <PaddedBackgroundText
+                                    text={"Contact us for any privacy-related concerns."}
+                                    background={ApplicationLinearGradient.current.appRedGradient}/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {/*Changes To Privacy Policy*/}
+                    <div style={{marginTop: "3rem"}} className={`text-white text-[1.25rem]`}>
+                        <PaddedBackgroundText
+                            text={"7. Changes To Privacy Policy"}
+                            background={ApplicationLinearGradient.current.appThanosGradient}/>
+                        <div style={{marginTop: "1rem"}}>
+                            We may update this Privacy Policy periodically. We will notify you of significant changes
+                            through the app or via email.
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div style={{marginInline: "auto", marginTop: "5rem"}}
+                     className={`w-[70vw] flex justify-center items-center`}>
+                    <PaddedBackgroundText text={"Thank You Cutie ❤️"}
+                                          background={ApplicationLinearGradient.current.appRedPinkGradient}/>
                 </div>
             </main>
         </React.Fragment>
@@ -211,7 +314,6 @@ const PaddedBackgroundText = ({
         <div
             style={{
                 width: fixedWidth ? "15rem" : "auto",
-                marginTop: "2rem",
                 padding: "0.5rem",
                 paddingInline: "1rem",
                 background: background,
