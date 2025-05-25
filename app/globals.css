@@ -13,7 +13,7 @@
 }
 
 .oswaldBold {
-    font-family: "Oswald", sans-serif;
+    font-family: var(--font-oswald), sans-serif;
     font-weight: bold;
 }
 

@@ -271,9 +271,9 @@ export default function Page(): React.JSX.Element {
 
 
                         <motion.button
-                            onClick={(e) => {
+                            onClick={async (e) => {
                                 e.preventDefault();
-                                sendQuestion();
+                                await sendQuestion();
                             }}
                             animate={{y: 0}}
                             initial={{y: 500}}
