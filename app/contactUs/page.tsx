@@ -3,10 +3,23 @@ import React from "react";
 import {ApplicationLinearGradient} from "@/app/modules/ApplicationHelper";
 import {AnimatePresence, motion} from "framer-motion";
 import MouseMagnetic from "@/app/components/MouseMagnetic";
-import {FaChevronLeft} from "react-icons/fa";
+import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import {addDoc, collection} from "@firebase/firestore";
+import {FirebaseDatabase} from "../database/FirebaseConfig";
+import {IoIosCheckmarkCircle} from "react-icons/io";
+
 
 export default function Page(): React.JSX.Element {
 
+
+    React.useEffect((): void => {
+        (
+            async (): Promise<void> => {
+                let locomotiveScroll = (await import("locomotive-scroll")).default;
+                const LocomotiveScroll = new locomotiveScroll();
+            }
+        )()
+    }, [])
     const [pageChangeState, setPageChangeState] = React.useState<boolean>(false);
 
 
@@ -17,6 +30,17 @@ export default function Page(): React.JSX.Element {
     const [showError, setShowError] = React.useState<boolean>(false);
     const [errorDescription, setErrorDescription] = React.useState<string>("");
 
+    const [loading, setLoading] = React.useState<boolean>(false);
+    const [showSuccess, setShowSuccess] = React.useState<boolean>(false);
+
+    React.useEffect((): void => {
+        if (showSuccess) {
+            setTimeout(() => {
+                setShowSuccess(false);
+            }, 2500);
+        }
+    }, [showSuccess]);
+
     function pushRoute(path: string): void {
 
         setPageChangeState(true);
@@ -26,7 +50,7 @@ export default function Page(): React.JSX.Element {
         }, 1000);
     }
 
-    function sendQuestion(): void {
+    async function sendQuestion(): Promise<void> {
         if (!userName || !userEmail || !userDescription) {
             setErrorDescription("Please enter each and every text fields!");
             setShowError(true);
@@ -60,7 +84,29 @@ export default function Page(): React.JSX.Element {
             return;
         }
 
+        try {
+            setLoading(true);
+            await addDoc(collection(FirebaseDatabase, "contacts"), {
+                fullName: userName,
+                email: userEmail,
+                description: userDescription,
+            })
+            setShowSuccess(true);
+            setUserName("");
+            setUserEmail("");
+            setUserDescription("");
+        } catch {
+            setErrorDescription("Some Error Occured! Please try again later!");
+            setShowError(true);
 
+
+            setTimeout(() => {
+                setShowError(false);
+                setErrorDescription("");
+            }, 2500);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -224,7 +270,6 @@ export default function Page(): React.JSX.Element {
                         </motion.textarea>
 
 
-
                         <motion.button
                             onClick={(e) => {
                                 e.preventDefault();
@@ -233,23 +278,55 @@ export default function Page(): React.JSX.Element {
                             animate={{y: 0}}
                             initial={{y: 500}}
                             transition={{duration: 1, ease: [0.85, 0, 0.15, 1], delay: 0.5}}
-                            whileHover={{cursor: "pointer", scaleY: 1.1}} whileTap={{scaleY: 0.9}}
-                            style={{padding: "0.5rem", marginTop: "1rem"}}
-                            className={`w-full bg-white text-black text-[1.25rem] rounded-xl border-none outline-none`}>
-                            Submit
+                            style={{
+                                padding: "0.5rem",
+                                marginTop: "1rem",
+                                background: ApplicationLinearGradient.current.appThanosGradient
+                            }}
+                            className={`w-full h-[3rem] flex justify-center items-center gap-[0.5rem] text-white text-[1rem] rounded-xl border-none outline-none cursor-pointer`}>
+                            {loading ? "Loading" : "Submit"}
+
+                            {!loading && (
+                                <div style={{padding: "0.25rem"}} className={`bg-[#21212175] rounded-full`}>
+                                    <FaChevronRight className={`scale-75`}/>
+                                </div>
+                            )}
                         </motion.button>
                     </motion.div>
 
                     <AnimatePresence>
                         {showError && (
                             <motion.div
-                                animate={{ scaleY: 1, filter: "blur(0)"}}
-                                initial={{ scaleY: 0, filter: "blur(10px)" }}
-                                exit={{ scaleY: 0, filter: "blur(10px)" }}
-                                transition={{ }}
-                                style={{marginBlock: "1rem", background: ApplicationLinearGradient.current.appRedGradient, padding: "0.75rem"}}
+                                animate={{scaleY: 1, filter: "blur(0)"}}
+                                initial={{scaleY: 0, filter: "blur(10px)"}}
+                                exit={{scaleY: 0, filter: "blur(10px)"}}
+                                transition={{}}
+                                style={{
+                                    marginBlock: "1rem",
+                                    background: ApplicationLinearGradient.current.appRedGradient,
+                                    padding: "0.75rem"
+                                }}
                                 className={`flex justify-center items-center text-white rounded-xl`}>
                                 {errorDescription}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    <AnimatePresence>
+                        {showSuccess && (
+                            <motion.div
+                                animate={{scaleY: 1, filter: "blur(0)"}}
+                                initial={{scaleY: 0, filter: "blur(10px)"}}
+                                exit={{scaleY: 0, filter: "blur(10px)"}}
+                                transition={{}}
+                                style={{
+                                    marginBlock: "1rem",
+                                    background: ApplicationLinearGradient.current.appGreenGradient,
+                                    padding: "0.75rem"
+                                }}
+                                className={`flex justify-center gap-[0.5rem] items-center text-white rounded-xl`}>
+                                Successfully Send Message
+                                <IoIosCheckmarkCircle/>
                             </motion.div>
                         )}
                     </AnimatePresence>
