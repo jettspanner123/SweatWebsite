@@ -282,7 +282,7 @@ export default function Page(): React.JSX.Element {
                                 marginTop: "1rem",
                                 background: ApplicationLinearGradient.current.appThanosGradient
                             }}
-                            className={`w-full h-[3rem] flex justify-center items-center gap-[0.5rem] text-white text-[1rem] rounded-xl border-none outline-none cursor-pointer`}>
+                            className={`w-full h-[3rem] flex justify-center items-center gap-[0.5rem] text-white text-[0.75rem] md:text-[1rem] rounded-xl border-none outline-none cursor-pointer`}>
                             {loading ? "Loading" : "Submit"}
 
                             {!loading && (
