@@ -90,13 +90,15 @@ export default function HomeScreen({
                         }}
                     >
                         {/*backgorund cards*/}
-                        <motion.div animate={{
-                            x: 0,
-                            y: 0
-                        }} initial={{
-                            x: 2500,
-                            y: -1200
-                        }} transition={{
+                        <motion.div
+                            animate={{
+                                x: 0,
+                                y: 0
+                            }}
+                            initial={{
+                                x: 2500,
+                                y: -1200
+                            }} transition={{
                             duration: 1.5,
                             ease: [0.85, 0, 0.15, 1]
                         }}
@@ -733,9 +735,10 @@ const FeatureScreen = (): React.JSX.Element => {
                                         return ApplicationLinearGradient.current.appBlueGradientInverted;
                                 }
                             }
+
                             return (
                                 <div
-                                    style={{ background: getBackgroundColor(index) }}
+                                    style={{background: getBackgroundColor(index)}}
                                     className={`h-[20rem] aspect-square oswaldBold text-white text-[10rem] flex justify-center items-center`}
                                     key={index}>
                                     {index}
