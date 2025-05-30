@@ -113,14 +113,14 @@ export default function Page(): React.JSX.Element {
     return (
         <React.Fragment>
             <main style={{background: ApplicationLinearGradient.current.appBackground, paddingBlock: "5rem"}}
-                  className={`min-h-screen w-screen`}>
+                  className={`min-h-screen w-screen relative !pt-[1rem] md:!py-[5rem]`}>
                 <motion.div
                     animate={{y: pageChangeState ? "100vh" : "0"}}
                     transition={{duration: 0.75, ease: [0.85, 0, 0.15, 1]}}
                     style={{marginInline: "auto"}} className={`w-[90vw] md:w-[70vw]`}>
 
                     <nav style={{paddingBlock: "1.25rem", marginInline: "auto"}}
-                         className={`lg:w-[70vw] w-[90%] flex justify-between items-center`}>
+                         className={`lg:w-[70vw] w-full flex justify-between items-center`}>
 
 
                         {/*bac button*/}
