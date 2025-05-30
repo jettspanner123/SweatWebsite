@@ -7,6 +7,7 @@ import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import {addDoc, collection} from "@firebase/firestore";
 import {FirebaseDatabase} from "../database/FirebaseConfig";
 import {IoIosCheckmarkCircle} from "react-icons/io";
+import { FaFilePrescription } from "react-icons/fa6";
 
 
 export default function Page(): React.JSX.Element {
@@ -119,12 +120,13 @@ export default function Page(): React.JSX.Element {
                     style={{marginInline: "auto"}} className={`w-[90vw] md:w-[70vw]`}>
 
                     <nav style={{paddingBlock: "1.25rem", marginInline: "auto"}}
-                         className={`w-[90vw] md:w-[70vw] flex justify-between items-center`}>
+                         className={`lg:w-[70vw] w-[90%] flex justify-between items-center`}>
 
 
                         {/*bac button*/}
                         <MouseMagnetic>
                             <motion.div
+                                onClick={() => pushRoute("/")}
                                 animate={{
                                     scale: 1
                                 }}
@@ -135,23 +137,22 @@ export default function Page(): React.JSX.Element {
                                     duration: 1,
                                     ease: [0.85, 0, 0.15, 1]
                                 }}
-                                onClick={() => pushRoute("/")}
                                 whileHover={{scale: 1.1, cursor: "pointer"}}
-                                className={`bg-white h-[4rem] w-[8rem] overflow-hidden rounded-full`}>
+                                className={`bg-white h-[3rem] w-[3rem] md:h-[4rem] md:w-[8rem] overflow-hidden rounded-full`}>
                                 <MouseMagnetic>
                                     <div
-                                        className={`h-[4rem] pointer-events-none w-[8rem] gap-[0.5rem] flex justify-center items-center`}>
+                                        className={`h-[3rem] h-[3rem] md:h-[4rem] md:w-[8rem] pointer-events-none  gap-[0.5rem] flex justify-center items-center`}>
                                         <FaChevronLeft/>
-                                        <p className={`cursor-default`}>Home</p>
+                                        <p className={`cursor-default lg:block hidden`}>Back</p>
                                     </div>
                                 </MouseMagnetic>
                             </motion.div>
                         </MouseMagnetic>
 
                         {/*the privacy policy heading*/}
-                        <h1 className={`text-white oswaldBold text-[4rem] uppercase`}>
+                        <h1 className={`text-white oswaldBold lg:text-[4rem] md:text-[3rem] text-[1.75rem] uppercase`}>
                             {
-                                "Contact-us".split("").map((item: string, index: number): React.JSX.Element => {
+                                "Contact-Us".split("").map((item: string, index: number): React.JSX.Element => {
                                     return (
                                         <motion.span
                                             animate={{y: 0}} initial={{y: -200}}
@@ -171,27 +172,25 @@ export default function Page(): React.JSX.Element {
 
 
                         {/*the contact us button*/}
-
                         <MouseMagnetic>
                             <motion.div
-                                animate={{
-                                    scale: 1
-                                }}
-                                initial={{
-                                    scale: 0
-                                }}
+                                animate={{scale: 1}}
+                                initial={{scale: 0}}
                                 transition={{
                                     duration: 1,
-                                    ease: [0.85, 0, 0.15, 1],
-                                    delay: 0.15
+                                    delay: 0.15,
+                                    ease: [0.85, 0, 0.15, 1]
                                 }}
                                 whileHover={{scale: 1.1, cursor: "pointer"}}
                                 onClick={() => pushRoute("/privacyPolicy")}
-                                className={`text-white border-[1px] border-white h-[4rem] w-[8rem] rounded-full`}>
+                                className={`text-white border-[1px] border-white h-[3rem] w-[3rem] md:h-[4rem] md:w-[8rem] rounded-full`}>
                                 <MouseMagnetic>
                                     <div
-                                        className={`h-[4rem] pointer-events-none w-[8rem] gap-[0.5rem] flex justify-center items-center`}>
-                                        Privacy Policy
+                                        className={`h-[3rem] w-[3rem] md:h-[4rem] md:w-[8rem] pointer-events-none gap-[0.5rem] flex justify-center items-center`}>
+                                        <span className={`md:block hidden`}>
+                                            Privacy Policy
+                                        </span>
+                                        <FaFilePrescription size={20} className={`md:hidden block`}/>
                                     </div>
                                 </MouseMagnetic>
                             </motion.div>
