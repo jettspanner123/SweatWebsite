@@ -376,7 +376,7 @@ const FeatureScreen = (): React.JSX.Element => {
         "the developer~Uddeshya Singh",
         "the designer~Suvogyan Chakraborty",
         "the advisor~Om Tomar",
-        "the gay~Soham Chakraborty"
+        "the helper~Soham Chakraborty"
     ];
 
     const [fourthSectionMousePosition, setFourthSectionMousePosition] = React.useState<{ x: number, y: number }>({
@@ -718,9 +718,25 @@ const FeatureScreen = (): React.JSX.Element => {
                         }}
                         style={{height: `${fourthSectionImages.length * 100}%`}} className={`w-full rounded-2xl`}>
                         {fourthSectionImages.map((item: StaticImageData, index: number): React.JSX.Element => {
+
+                            function getBackgroundColor(index: number): string {
+                                switch (index) {
+                                    case 0:
+                                        return ApplicationLinearGradient.current.appRedPinkGradient;
+                                    case 1:
+                                        return ApplicationLinearGradient.current.appBlueGradientInverted;
+                                    case 2:
+                                        return ApplicationLinearGradient.current.appGreenGradient;
+                                    case 3:
+                                        return ApplicationLinearGradient.current.appThanosGradient;
+                                    default:
+                                        return ApplicationLinearGradient.current.appBlueGradientInverted;
+                                }
+                            }
                             return (
                                 <div
-                                    className={`h-[20rem] aspect-square oswaldBold text-white text-[10rem] bg-blue-300 flex justify-center items-center`}
+                                    style={{ background: getBackgroundColor(index) }}
+                                    className={`h-[20rem] aspect-square oswaldBold text-white text-[10rem] flex justify-center items-center`}
                                     key={index}>
                                     {index}
                                 </div>
