@@ -138,7 +138,7 @@ export default function Page(): React.JSX.Element {
                             padding: "1.5rem",
                             transformOrigin: "top center"
                         }}
-                        className={`lg:w-[70vw] w-[90%] flex justify-center items-center text-white rounded-2xl text-[1.25rem]`}>
+                        className={`lg:w-[70vw] w-[90%] flex justify-center items-center text-white rounded-2xl text-[1rem] md:text-[1.25rem]`}>
                         The Privacy Policy will help you better understand how we collect, use and share you personal
                         information.
                     </motion.div>
@@ -150,7 +150,7 @@ export default function Page(): React.JSX.Element {
                         {/*date of privacy policy*/}
                         <motion.h1
                             style={{marginTop: "2rem"}}
-                            className={`text-white text-[1.25rem] flex gap-[1rem] items-center`}>
+                            className={`text-white text-[1rem] md:text-[1.25rem] flex gap-[1rem] items-center`}>
                             <motion.div
                                 animate={{scale: 1}}
                                 initial={{scale: 0}}
@@ -177,7 +177,7 @@ export default function Page(): React.JSX.Element {
                         <motion.h1
                             animate={{opacity: 1}} initial={{opacity: 0}}
                             transition={{duration: 1, delay: 0.35}} style={{marginTop: "1rem"}}
-                            className={`text-white text-[1.25rem] text-justify`}>
+                            className={`text-white text-[1rem] md:text-[1rem] md:text-[1.25rem] text-justify`}>
                             Welcome to <span className={`font-bold`}> Sweat If </span> We value your privacy and are
                             committed to protecting your personal
                             information. This Privacy Policy outlines how we collect, use, store, and protect the data
@@ -193,7 +193,7 @@ export default function Page(): React.JSX.Element {
                                 delay={0.4}
                             />
 
-                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                 <motion.span
                                     className={`text-justify`}
                                     animate={{opacity: 1}} initial={{opacity: 0}}
@@ -281,7 +281,7 @@ export default function Page(): React.JSX.Element {
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
                             <motion.div
                                 animate={{opacity: 1}} initial={{opacity: 0}} transition={{duration: 1, delay: 0.3}}
-                                style={{marginTop: "1rem"}} className={`text-white text-[1.25rem] text-justify`}>
+                                style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem] text-justify`}>
                                 We use the information we collect to provide you with a personalized and effective
                                 health
                                 and fitness experience. This includes generating customized workout routines and diet
@@ -301,7 +301,7 @@ export default function Page(): React.JSX.Element {
                                 text={"3. AI And Personalisation"}
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
 
-                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem] text-justify`}>
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem] text-justify`}>
                                 Our app uses AI algorithms to deliver smart recommendations tailored to your fitness
                                 level,
                                 goals, and habits. The AI learns from your data to improve over time and enhance your
@@ -317,22 +317,22 @@ export default function Page(): React.JSX.Element {
                                 text={"4. Data Sharing And Third Parties"}
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
 
-                            <h1 style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                            <h1 style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                 We do not sell your personal data. We may share data with:
                             </h1>
                             <div className={`!ml-[1.5rem] md:!ml-[4rem]`}>
-                                <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                     <PaddedBackgroundText text={"Cloud providers for secure storage."}
                                                           background={ApplicationLinearGradient.current.appRedGradient}/>
                                 </div>
 
-                                <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                     <PaddedBackgroundText
                                         text={"Analytics services to improve app performance (anonymized data only)."}
                                         background={ApplicationLinearGradient.current.appRedGradient}/>
                                 </div>
 
-                                <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                     <PaddedBackgroundText
                                         text={"Healthcare integrations (only if you explicitly authorize)."}
                                         background={ApplicationLinearGradient.current.appRedGradient}/>
@@ -342,7 +342,7 @@ export default function Page(): React.JSX.Element {
 
 
                         {/*data security*/}
-                        <div style={{marginTop: "3rem"}} className={`text-white text-[1.25rem]`}>
+                        <div style={{marginTop: "3rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                             <PaddedBackgroundText
                                 text={"5. Data Security"}
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
@@ -360,28 +360,28 @@ export default function Page(): React.JSX.Element {
                                 text={"6. Your Rights"}
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
 
-                            <h1 style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                            <h1 style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                 You have the right to:
                             </h1>
                             <div className={`!ml-[1.5rem] md:!ml-[4rem]`}>
-                                <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                     <PaddedBackgroundText text={"Access or update your personal data."}
                                                           background={ApplicationLinearGradient.current.appRedGradient}/>
                                 </div>
 
-                                <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                     <PaddedBackgroundText
                                         text={"Delete your account and associated data."}
                                         background={ApplicationLinearGradient.current.appRedGradient}/>
                                 </div>
 
-                                <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                     <PaddedBackgroundText
                                         text={"Withdraw consent for data processing."}
                                         background={ApplicationLinearGradient.current.appRedGradient}/>
                                 </div>
 
-                                <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                <div style={{marginTop: "1rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                                     <PaddedBackgroundText
                                         text={"Contact us for any privacy-related concerns."}
                                         background={ApplicationLinearGradient.current.appRedGradient}/>
@@ -391,7 +391,7 @@ export default function Page(): React.JSX.Element {
 
 
                         {/*Changes To Privacy Policy*/}
-                        <div style={{marginTop: "3rem"}} className={`text-white text-[1.25rem]`}>
+                        <div style={{marginTop: "3rem"}} className={`text-white text-[1rem] md:text-[1.25rem]`}>
                             <PaddedBackgroundText
                                 text={"7. Changes To Privacy Policy"}
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
@@ -444,7 +444,7 @@ const PaddedBackgroundText = ({
                 background: background,
                 marginRight: wantRightMargin ? "1rem" : "0"
             }}
-            className={`text-white inline-block text-[1.25rem] rounded-xl`}>
+            className={`text-white inline-block text-[1rem] md:text-[1.25rem] rounded-xl`}>
             {text}
         </motion.div>
     )

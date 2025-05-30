@@ -210,7 +210,7 @@ export default function Page(): React.JSX.Element {
                                     transition={{
                                         duration: 1,
                                     }}
-                                    style={{paddingInline: "0.5rem"}} className={`text-[1.25rem] text-white`}>
+                                    style={{paddingInline: "0.5rem"}} className={`text-[1rem] md:text-[1.25rem] text-white`}>
                                     Full Name
                                 </motion.h1>
                                 <motion.input
@@ -221,7 +221,7 @@ export default function Page(): React.JSX.Element {
                                     value={userName}
                                     type={"text"}
                                     style={{padding: "0.75rem", marginTop: "1rem", transformOrigin: "left"}}
-                                    className={`border-[0.5px] border-white rounded-2xl w-full text-white text-[1.25rem]`}
+                                    className={`border-[0.5px] border-white rounded-2xl w-full text-white text-[1rem] md:text-[1.25rem]`}
                                     placeholder={"Name"}
                                 />
                             </div>
@@ -236,7 +236,7 @@ export default function Page(): React.JSX.Element {
                                             duration: 1,
                                             delay: 0.2
                                         }}
-                                        style={{paddingInline: "0.5rem"}} className={`text-[1.25rem] text-white`}>
+                                        style={{paddingInline: "0.5rem"}} className={`text-[1rem] md:text-[1.25rem] text-white`}>
                                         Email Address
                                     </motion.h1>
                                     <motion.input
@@ -247,7 +247,7 @@ export default function Page(): React.JSX.Element {
                                         value={userEmail}
                                         type={"email"}
                                         style={{padding: "0.75rem", marginTop: "1rem", transformOrigin: "left"}}
-                                        className={`border-[0.5px] border-white rounded-2xl w-full text-white text-[1.25rem]`}
+                                        className={`border-[0.5px] border-white rounded-2xl w-full text-white text-[1rem] md:text-[1.25rem]`}
                                         placeholder={"Address"}
                                     />
                                 </div>
@@ -264,7 +264,7 @@ export default function Page(): React.JSX.Element {
                             }}
                             style={{marginTop: "1rem", padding: "0.75rem"}}
                             placeholder={"Tell Us What You Think."}
-                            className={`w-full border-[0.5px] text-[1.25rem] min-h-[15rem] border-white rounded-xl text-white`}
+                            className={`w-full border-[0.5px] text-[1rem] md:text-[1.25rem] min-h-[15rem] border-white rounded-xl text-white`}
                             onChange={(e) => setUserDescription(e.target.value)} value={userDescription}>
 
                         </motion.textarea>

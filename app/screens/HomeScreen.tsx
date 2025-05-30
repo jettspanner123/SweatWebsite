@@ -212,7 +212,7 @@ export default function HomeScreen({
                                                                 initial={{scale: 0, filter: "blur(10px)"}}
                                                                 transition={{duration: 0.5, delay: 0.05 * index}}
                                                                 style={{marginRight: "8px"}}
-                                                                className={`text-white/50 font-semibold text-[1.25rem] inline-block overflow-hidden`}
+                                                                className={`text-white/50 font-semibold text-[1rem] md:text-[1.25rem] inline-block overflow-hidden`}
                                                                 key={index}>{word}</motion.span>
                                         })}
                                     </p>
@@ -416,7 +416,7 @@ const FeatureScreen = (): React.JSX.Element => {
                     {/*first section text*/}
                     <motion.h1
                         style={{marginTop: "1rem"}}
-                        className={`text-[1.25rem] text-white text-justify`}>
+                        className={`text-[1rem] md:text-[1.25rem] text-white text-justify`}>
                         {firstSectionText}
                     </motion.h1>
 
@@ -534,7 +534,7 @@ const FeatureScreen = (): React.JSX.Element => {
                             <motion.h1
                                 key={currentSelectedScreen}
                                 style={{marginTop: "1rem"}}
-                                className="text-[1.25rem] text-white text-right flex"
+                                className="text-[1rem] md:text-[1.25rem] text-white text-right flex"
                                 initial={{opacity: 0, y: 10, filter: "blur(10px)"}}
                                 animate={{opacity: 1, y: 0, filter: "blur(0px)"}}
                                 exit={{opacity: 0, y: -10, filter: "blur(10px)"}}
