@@ -31,8 +31,8 @@ export default function Page(): React.JSX.Element {
     return (
         <React.Fragment>
             <main
-                className={`min-h-screen w-screen relative`}
-                style={{paddingBlock: "5rem"}}>
+                className={`min-h-screen w-screen relative !pt-[1rem] md:!pt-[5rem]`}
+                >
 
                 <div style={{background: ApplicationLinearGradient.current.appBackground, top: "0"}}
                      className={`fixed w-screen h-screen z-[-1]`}>
@@ -74,7 +74,7 @@ export default function Page(): React.JSX.Element {
                         </MouseMagnetic>
 
                         {/*the privacy policy heading*/}
-                        <h1 className={`text-white oswaldBold lg:text-[4rem] md:text-[3rem] text-[2rem] uppercase`}>
+                        <h1 className={`text-white oswaldBold lg:text-[4rem] md:text-[3rem] text-[1.25rem] uppercase`}>
                             {
                                 "Privacy-Policy".split("").map((item: string, index: number): React.JSX.Element => {
                                     return (
@@ -194,8 +194,10 @@ export default function Page(): React.JSX.Element {
                             />
 
                             <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
-                                <motion.span animate={{opacity: 1}} initial={{opacity: 0}}
-                                             transition={{duration: 1, delay: 0.3}}>
+                                <motion.span
+                                    className={`text-justify`}
+                                    animate={{opacity: 1}} initial={{opacity: 0}}
+                                    transition={{duration: 1, delay: 0.3}}>
                                     We may collection the following types of information:
                                 </motion.span>
 
@@ -210,6 +212,7 @@ export default function Page(): React.JSX.Element {
                                     <motion.span
                                         animate={{opacity: 1}} initial={{opacity: 0}}
                                         transition={{duration: 1, delay: 0.8}}
+                                        className={`text-justify`}
                                     >
                                         Name, email address, age, gender, weight, height, fitness goals, and dietary
                                         preferences.
@@ -278,7 +281,7 @@ export default function Page(): React.JSX.Element {
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
                             <motion.div
                                 animate={{opacity: 1}} initial={{opacity: 0}} transition={{duration: 1, delay: 0.3}}
-                                style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                                style={{marginTop: "1rem"}} className={`text-white text-[1.25rem] text-justify`}>
                                 We use the information we collect to provide you with a personalized and effective
                                 health
                                 and fitness experience. This includes generating customized workout routines and diet
@@ -298,7 +301,7 @@ export default function Page(): React.JSX.Element {
                                 text={"3. AI And Personalisation"}
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
 
-                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
+                            <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem] text-justify`}>
                                 Our app uses AI algorithms to deliver smart recommendations tailored to your fitness
                                 level,
                                 goals, and habits. The AI learns from your data to improve over time and enhance your
@@ -317,7 +320,7 @@ export default function Page(): React.JSX.Element {
                             <h1 style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
                                 We do not sell your personal data. We may share data with:
                             </h1>
-                            <div style={{marginLeft: "4rem"}}>
+                            <div className={`!ml-[1.5rem] md:!ml-[4rem]`}>
                                 <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
                                     <PaddedBackgroundText text={"Cloud providers for secure storage."}
                                                           background={ApplicationLinearGradient.current.appRedGradient}/>
@@ -343,7 +346,7 @@ export default function Page(): React.JSX.Element {
                             <PaddedBackgroundText
                                 text={"5. Data Security"}
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
-                            <div style={{marginTop: "1rem"}}>
+                            <div style={{marginTop: "1rem"}} className={`text-justify`}>
                                 We implement strong security measures including encryption, secure storage, and limited
                                 access
                                 to protect your information.
@@ -360,7 +363,7 @@ export default function Page(): React.JSX.Element {
                             <h1 style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
                                 You have the right to:
                             </h1>
-                            <div style={{marginLeft: "4rem"}}>
+                            <div className={`!ml-[1.5rem] md:!ml-[4rem]`}>
                                 <div style={{marginTop: "1rem"}} className={`text-white text-[1.25rem]`}>
                                     <PaddedBackgroundText text={"Access or update your personal data."}
                                                           background={ApplicationLinearGradient.current.appRedGradient}/>
@@ -392,7 +395,7 @@ export default function Page(): React.JSX.Element {
                             <PaddedBackgroundText
                                 text={"7. Changes To Privacy Policy"}
                                 background={ApplicationLinearGradient.current.appThanosGradient}/>
-                            <div style={{marginTop: "1rem"}}>
+                            <div style={{marginTop: "1rem"}} className={`text-justify`}>
                                 We may update this Privacy Policy periodically. We will notify you of significant
                                 changes
                                 through the app or via email.
