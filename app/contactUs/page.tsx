@@ -219,8 +219,8 @@ export default function Page(): React.JSX.Element {
                                     onChange={(e) => setUserName((e.target.value))}
                                     value={userName}
                                     type={"text"}
-                                    style={{padding: "0.75rem", marginTop: "1rem", transformOrigin: "left"}}
-                                    className={`border-[0.5px] border-white rounded-2xl w-full text-white text-[1rem] md:text-[1.25rem]`}
+                                    style={{padding: "0.75rem", transformOrigin: "left"}}
+                                    className={`border-[0.5px] !mt-[0.25rem] md:!mt-[1rem] border-white rounded-2xl w-full text-white text-[1rem] md:text-[1.25rem]`}
                                     placeholder={"Name"}
                                 />
                             </div>
@@ -246,7 +246,7 @@ export default function Page(): React.JSX.Element {
                                         value={userEmail}
                                         type={"email"}
                                         style={{padding: "0.75rem", marginTop: "1rem", transformOrigin: "left"}}
-                                        className={`border-[0.5px] border-white rounded-2xl w-full text-white text-[1rem] md:text-[1.25rem]`}
+                                        className={`border-[0.5px] !mt-[0.25rem] md:!mt-[1rem] border-white rounded-2xl w-full text-white text-[1rem] md:text-[1.25rem]`}
                                         placeholder={"Address"}
                                     />
                                 </div>
