@@ -12,6 +12,7 @@ import {FaApple, FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import {MdEmail} from "react-icons/md";
 import {MotionValue} from "motion";
 import {RxCross1} from "react-icons/rx";
+import { IoPersonSharp } from "react-icons/io5";
 
 
 // IMages import
@@ -23,6 +24,10 @@ import AppHomeScreenImage from "@/app/assets/app_home.jpeg";
 import AppWorkoutScreenImage from "@/app/assets/workout_screen.png";
 import AppDietScreenImage from "@/app/assets/diet_screen.png";
 import AppProfileScreenImage from "@/app/assets/diet_screen.png";
+import SohamPortrait from "@/app/assets/soham.png";
+import OmPortrait from "@/app/assets/tomar.png";
+import UddeshyaPortrait from "@/app/assets/uddeshya_Red.png";
+import RonnyPortrait from "@/app/assets/ronny_pink.png";
 
 
 interface HomeScreenProps {
@@ -366,11 +371,11 @@ const FeatureScreen = (): React.JSX.Element => {
         offset: ["start end", "start 20%"]
     })
     const fourthSectionImages: Array<StaticImageData> = [
-        AppHomeScreenImage,
-        AppHomeScreenImage,
-        AppHomeScreenImage,
-        AppHomeScreenImage,
-        AppHomeScreenImage,
+        UddeshyaPortrait,
+        UddeshyaPortrait,
+        RonnyPortrait,
+        OmPortrait,
+        SohamPortrait
     ];
 
     const fourthSectionText: Array<string> = [
@@ -741,7 +746,13 @@ const FeatureScreen = (): React.JSX.Element => {
                                     style={{background: getBackgroundColor(index)}}
                                     className={`h-[20rem] aspect-square oswaldBold text-white text-[10rem] flex justify-center items-center`}
                                     key={index}>
-                                    {index}
+                                    {
+                                        index === 0 ? (
+                                            <IoPersonSharp className={`opacity-70`}/>
+                                        ) : (
+                                            <Image src={item} alt={`${index}`}/>
+                                        )
+                                    }
                                 </div>
                             )
                         })}
@@ -795,7 +806,6 @@ const FeatureScreen = (): React.JSX.Element => {
             <section
                 style={{background: ApplicationLinearGradient.current.appBackgroundInverted}}
                 className={`h-screen w-screen relative`}>
-
 
             </section>
 
