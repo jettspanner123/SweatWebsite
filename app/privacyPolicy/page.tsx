@@ -74,7 +74,7 @@ export default function Page(): React.JSX.Element {
                         </MouseMagnetic>
 
                         {/*the privacy policy heading*/}
-                        <h1 className={`text-white oswaldBold lg:text-[4rem] md:text-[3rem] text-[1.25rem] uppercase`}>
+                        <h1 className={`text-white oswaldBold lg:text-[4rem] md:text-[3rem] text-[1.75rem] uppercase`}>
                             {
                                 "Privacy-Policy".split("").map((item: string, index: number): React.JSX.Element => {
                                     return (
