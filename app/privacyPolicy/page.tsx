@@ -4,7 +4,7 @@ import {ApplicationLinearGradient} from "@/app/modules/ApplicationHelper";
 import MouseMagnetic from "@/app/components/MouseMagnetic";
 import {FaChevronLeft} from "react-icons/fa";
 import {motion} from "framer-motion";
-import { MdEdit } from "react-icons/md";
+import {MdEdit} from "react-icons/md";
 
 export default function Page(): React.JSX.Element {
 
@@ -177,7 +177,7 @@ export default function Page(): React.JSX.Element {
                         <motion.h1
                             animate={{opacity: 1}} initial={{opacity: 0}}
                             transition={{duration: 1, delay: 0.35}} style={{marginTop: "1rem"}}
-                            className={`text-white text-[1.25rem]`}>
+                            className={`text-white text-[1.25rem] text-justify`}>
                             Welcome to <span className={`font-bold`}> Sweat If </span> We value your privacy and are
                             committed to protecting your personal
                             information. This Privacy Policy outlines how we collect, use, store, and protect the data
@@ -199,7 +199,7 @@ export default function Page(): React.JSX.Element {
                                     We may collection the following types of information:
                                 </motion.span>
 
-                                <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
+                                <div className={`gap-[0.5rem] md:!ml-[4rem] !mt-[1rem] !ml-[1.5rem]`}>
                                     <PaddedBackgroundText
                                         text={"Personal Information"}
                                         background={ApplicationLinearGradient.current.appBlueGradientInverted}
@@ -217,7 +217,7 @@ export default function Page(): React.JSX.Element {
 
                                 </div>
 
-                                <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
+                                <div className={`gap-[0.5rem] md:!ml-[4rem] !mt-[1rem] !ml-[1.5rem]`}>
                                     <PaddedBackgroundText
                                         text={"Health & Fitness Data"}
                                         background={ApplicationLinearGradient.current.appBlueGradientInverted}
@@ -235,7 +235,7 @@ export default function Page(): React.JSX.Element {
                                     </motion.span>
                                 </div>
 
-                                <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
+                                <div className={`gap-[0.5rem] md:!ml-[4rem] !mt-[1rem] !ml-[1.5rem]`}>
                                     <PaddedBackgroundText
                                         text={"Device Information"}
                                         background={ApplicationLinearGradient.current.appBlueGradientInverted}
@@ -251,7 +251,7 @@ export default function Page(): React.JSX.Element {
                                     </motion.span>
                                 </div>
 
-                                <div style={{marginLeft: "4rem", marginTop: "1rem"}} className={`gap-[0.5rem]`}>
+                                <div className={`gap-[0.5rem] md:!ml-[4rem] !mt-[1rem] !ml-[1.5rem]`}>
                                     <PaddedBackgroundText
                                         text={"AI Driven Data Inputs"}
                                         background={ApplicationLinearGradient.current.appBlueGradientInverted}
