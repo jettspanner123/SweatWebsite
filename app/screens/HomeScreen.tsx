@@ -12,7 +12,7 @@ import {FaApple, FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import {MdEmail} from "react-icons/md";
 import {MotionValue} from "motion";
 import {RxCross1} from "react-icons/rx";
-import { IoPersonSharp } from "react-icons/io5";
+import {IoPersonSharp} from "react-icons/io5";
 
 
 // IMages import
@@ -28,6 +28,7 @@ import SohamPortrait from "@/app/assets/soham.png";
 import OmPortrait from "@/app/assets/tomar.png";
 import UddeshyaPortrait from "@/app/assets/uddeshya_Red.png";
 import RonnyPortrait from "@/app/assets/ronny_pink.png";
+import SharanMaamPortrat from "@/app/assets/sharan_maam.png";
 
 
 interface HomeScreenProps {
@@ -371,7 +372,7 @@ const FeatureScreen = (): React.JSX.Element => {
         offset: ["start end", "start 20%"]
     })
     const fourthSectionImages: Array<StaticImageData> = [
-        UddeshyaPortrait,
+        SharanMaamPortrat,
         UddeshyaPortrait,
         RonnyPortrait,
         OmPortrait,
@@ -654,7 +655,7 @@ const FeatureScreen = (): React.JSX.Element => {
 
                 <motion.div
                     style={{y: thirdSectionScrollTranslation}}
-                    className={`flex-1 flex flex-col items-center`}>
+                    className={`flex-1 flex flex-col items-center `}>
                     <IphoneWithImage withImage={AppHomeScreenImage}/>
                     <IphoneWithImage withImage={AppHomeScreenImage}/>
                     <IphoneWithImage withImage={AppHomeScreenImage}/>
@@ -715,7 +716,17 @@ const FeatureScreen = (): React.JSX.Element => {
                         top: fourthSectionMousePosition.y - (320 / 2),
                         left: fourthSectionMousePosition.x - (320 / 2)
                     }}
-                    transition={{ease: [0.25, 1, 1, 1], duration: 0.5}}
+                    transition={{
+                        scale: {
+                            ease: [0.25, 1, 1, 1]
+                        },
+                        top: {
+                            ease: [0, 0.55, 0.45, 1], duration: 1
+                        },
+                        left: {
+                            ease: [0, 0.55, 0.45, 1], duration: 1
+                        }
+                    }}
                     style={{background: ApplicationLinearGradient.current.appThanosGradient}}
                     className={`fixed z-[100] pointer-events-none h-[20rem] aspect-square rounded-2xl overflow-hidden`}>
 
@@ -784,14 +795,15 @@ const FeatureScreen = (): React.JSX.Element => {
                                     y: springHeadingTranslation,
                                     background: "transparent"
                                 }}
-                                className={`flex-1 w-full flex justify-between poppins-light items-center text-white`}
+                                className={`flex-1 w-full custom-md:flex justify-between poppins-light items-center text-white`}
                                 key={index}>
                                 <h1 style={{lineHeight: 1, letterSpacing: "-5px"}}
-                                    className={`oswaldBold text-[9rem] uppercase`}>
+                                    className={`oswaldBold text-[9rem] uppercase [@media(max-width:1150px)]:text-[7rem] [@media(max-width:950px)]:text-[5rem] [@media(max-width:950px)]:text-center`}>
                                     {role}
                                 </h1>
 
-                                <h1 style={{lineHeight: 1, letterSpacing: "0px"}} className={`text-[2rem] `}>
+                                <h1 style={{lineHeight: 1, letterSpacing: "0px"}}
+                                    className={`text-[2rem] !px-[1rem] !pt-[1rem] custom-md:!px-0 custom-md:!pt-0 [@media(max-width:950px)]:text-center`}>
                                     {name}
                                 </h1>
                             </motion.div>

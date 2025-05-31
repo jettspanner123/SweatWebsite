@@ -128,3 +128,7 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+@theme {
+    --breakpoint-custom-md: 1455;
+}
