@@ -22,7 +22,7 @@ const PrimaryButtonWithIcon = ({text, icon, background, onTapGesture}: PrimaryBu
                     cursor: "pointer",
                     y: -5
                 }}
-                className={`w-[200px] flex gap-[0.5rem] justify-center items-center h-[55px] rounded-[17px] text-white/70 group hover:text-white transition-colors text-[1rem] font-semibold`}>
+                className={`w-[200px] [@media(max-width:790px)]:w-[150px] flex gap-[0.5rem] justify-center items-center h-[55px] rounded-[17px] text-white/70 group hover:text-white transition-colors text-[1rem] [@media(max-width:790px)]:text-[0.75rem] font-semibold`}>
                 {text}
 
                 <div style={{padding: "0.5rem"}}

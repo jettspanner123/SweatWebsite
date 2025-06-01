@@ -132,7 +132,7 @@ export default function HomeScreen({
 
                         {/*twin workout and diet icons*/}
                         <div
-                            className={`absolute w-[70%] flex justify-between items-center top-[43%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200]`}>
+                            className={`absolute [@media(max-width:1400px)]:hidden w-[70%] flex justify-between items-center top-[43%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200]`}>
 
 
                             {/*workout icon*/}
@@ -193,7 +193,7 @@ export default function HomeScreen({
                                         animate={{y: 0, filter: "blur(0)"}} initial={{y: -500, filter: "blur(10px)"}}
                                         transition={{duration: 1.25, ease: [0.87, 0, 0.13, 1]}}
                                         style={{lineHeight: "6.5rem"}}
-                                        className={`oswaldBold text-white text-[6rem]`}>
+                                        className={`oswaldBold text-white text-[6rem] [@media(max-width:500px)]:text-[3rem] [@media(max-width:790px)]:text-[4rem]`}>
                                         Be your own
                                     </motion.h1>
                                 </motion.div>
@@ -204,7 +204,8 @@ export default function HomeScreen({
                                         animate={{scale: 1, filter: "blur(0)"}}
                                         initial={{scale: 0, filter: "blur(10px)"}}
                                         transition={{duration: 1.25, ease: [0.87, 0, 0.13, 1], delay: 0.25}}
-                                        className={`oswaldBold text-white text-[6rem] leading-none`}>workout guide.
+                                        className={`oswaldBold text-white text-[6rem] [@media(max-width:790px)]:text-[4rem] leading-none`}>workout
+                                        guide.
                                     </motion.h1>
                                 </motion.div>
 
@@ -212,14 +213,19 @@ export default function HomeScreen({
                                 {/*description*/}
                                 <motion.div data-scroll data-scroll-speed={"0.05"}>
                                     <p style={{marginTop: "3rem", lineHeight: "1"}}
-                                       className={`flex flex-wrap max-w-[50%] justify-center text-justify translate-x-1/2 relative`}>
+                                       className={`flex flex-wrap w-[50%] !mx-auto [@media(max-width:790px)]:w-[70%] justify-center text-justify relative`}>
                                         {description.split(" ").map((word: string, index: number): React.JSX.Element => {
-                                            return <motion.span animate={{scale: 1, filter: "blur(0)"}}
-                                                                initial={{scale: 0, filter: "blur(10px)"}}
-                                                                transition={{duration: 0.5, delay: 0.05 * index}}
-                                                                style={{marginRight: "8px"}}
-                                                                className={`text-white/50 font-semibold text-[1rem] md:text-[1.25rem] inline-block overflow-hidden`}
-                                                                key={index}>{word}</motion.span>
+                                            return (
+                                                <motion.span
+                                                    animate={{scale: 1, filter: "blur(0)"}}
+                                                    initial={{scale: 0, filter: "blur(10px)"}}
+                                                    transition={{duration: 0.5, delay: 0.05 * index}}
+                                                    style={{marginRight: "8px"}}
+                                                    className={`text-white/50 font-semibold text-[1rem] md:text-[1.25rem] inline-block overflow-hidden`}
+                                                    key={index}>
+                                                    {word}
+                                                </motion.span>
+                                            )
                                         })}
                                     </p>
                                 </motion.div>
@@ -258,7 +264,7 @@ export default function HomeScreen({
                                        className={`object-cover object-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[3300]`}/>
 
                                 <Image src={AppHomeScreenImage} alt={""} style={{scale: 0.39}}
-                                       className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[10rem]`}/>
+                                       className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50px]`}/>
                             </motion.div>
                         </motion.div>
                     </motion.div>
