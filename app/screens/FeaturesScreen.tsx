@@ -793,7 +793,7 @@ export default function FeatureScreen(): React.JSX.Element {
                                         y: springHeadingTranslation,
                                         background: index % 2 ? "transparent" : "rgba(255, 255, 255, 0.1)",
                                     }}
-                                    className={`flex-1 w-full custom-md:flex justify-between poppins-light items-center text-white`}
+                                    className={`flex-1 w-full flex-col custom-md:flex-row custom-md:flex justify-between poppins-light items-center text-white`}
                                     key={index}
                                 >
                                     <h1
