@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import {ApplicationLinearGradient} from "@/app/modules/ApplicationHelper";
-import MouseMagnetic from "@/app/components/MouseMagnetic";
+import { ApplicationLinearGradient } from "@/constants/application";
+import MouseMagnetic from "@/components/MouseMagnetic";
 import {FaChevronLeft} from "react-icons/fa";
 import {motion} from "framer-motion";
 import {MdEdit} from "react-icons/md";

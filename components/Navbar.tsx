@@ -1,0 +1,104 @@
+import React from "react";
+import { BiDumbbell } from "react-icons/bi";
+import { ApplicationLinearGradient } from "@/constants/application";
+import { motion } from "framer-motion";
+import { PageStateStore } from "@/stores/pageState";
+
+export default function Navbar(): React.JSX.Element {
+    const navbarOptions: Array<{ name: string; link: string }> = [
+        { name: "Home", link: "/" },
+        { name: "Features", link: "/features" },
+        { name: "Working", link: "/working" },
+        { name: "About", link: "/about" },
+    ];
+
+    return (
+        <motion.nav
+            animate={{
+                y: 0,
+                filter: "blur(0px)",
+            }}
+            initial={{
+                y: -200,
+                filter: "blur(100px)",
+            }}
+            transition={{
+                duration: 1,
+                ease: [0.85, 0, 0.15, 1],
+            }}
+            style={{
+                paddingBlock: "1.5rem",
+                backdropFilter: "blur(15px)",
+            }}
+            className={`w-screen flex justify-center items-center absolute bottom-0 left-0 z-[200]`}
+        >
+            <section className={`w-[85%] bg-transparent flex text-white justify-between`}>
+                <div className={`flex gap-[0.25rem] items-center`}>
+                    <BiDumbbell size={35} />
+                    <h1 className={`text-[2.25rem] oswaldBold uppercase`}>Sweat It</h1>
+                </div>
+
+                <ul className={`flex gap-[0.25rem]`}>
+                    {navbarOptions.map((item: { name: string; link: string }, index: number) => {
+                        return <NavbarLink name={item.name} link={item.link} key={index} />;
+                    })}
+                </ul>
+
+                <div
+                    style={{
+                        padding: "0.5rem",
+                        background: ApplicationLinearGradient.current.appBlueGradient,
+                    }}
+                    className={`font-semibold rounded-full w-[100px] flex justify-center items-center hover:cursor-pointer`}
+                >
+                    Contact
+                </div>
+            </section>
+        </motion.nav>
+    );
+}
+
+interface NavbarLinkInterface {
+    name: string;
+    link: string;
+}
+
+export function NavbarLink(item: NavbarLinkInterface): React.JSX.Element {
+    const ref = React.useRef<HTMLLIElement>(null);
+    const [isHovered, setHover] = React.useState<boolean>(false);
+
+    const { selectedPageLink } = PageStateStore();
+
+    return (
+        <li
+            onMouseOver={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            ref={ref}
+            style={{ paddingBlock: "0.15rem", paddingInline: "0.5rem" }}
+            className={`w-[100px] font-semibold hover:cursor-pointer flex justify-center items-center relative rounded-full`}
+        >
+            <span className={`absolute text-[1rem] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[3]`}>
+                {item.name}
+            </span>
+
+            <motion.div
+                style={{
+                    background:
+                        selectedPageLink === item.link
+                            ? ApplicationLinearGradient.current.appRedGradient
+                            : ApplicationLinearGradient.current.appBlueGradient,
+                    height: ref.current?.getBoundingClientRect().height,
+                    width:
+                        isHovered
+                            ? ref.current?.getBoundingClientRect().width
+                            : selectedPageLink === item.link
+                              ? ref.current?.getBoundingClientRect().width
+                              : 0,
+                    scaleY: isHovered ? 1 : selectedPageLink === item.link ? 1 : 0.25,
+                    transformOrigin: "center",
+                }}
+                className={`absolute left-0 top-0 rounded-full transition-all duration-500 ease-in-out`}
+            />
+        </li>
+    );
+}

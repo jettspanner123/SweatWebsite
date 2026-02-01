@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import HomeScreen from "@/app/screens/HomeScreen";
-import { CurrentSelectedScreenType } from "@/app/modules/ApplicationHelper";
+import HomeScreen from "@/screens/HomeScreen";
+import { CurrentSelectedScreenType } from "@/constants/application";
 
 export default function Home(): React.JSX.Element {
     React.useEffect((): void => {

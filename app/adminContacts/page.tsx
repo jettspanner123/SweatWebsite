@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import MouseMagnetic from "@/app/components/MouseMagnetic";
+import MouseMagnetic from "@/components/MouseMagnetic";
 import { motion } from "framer-motion";
 import { FaChevronLeft } from "react-icons/fa";
-import { ApplicationLinearGradient } from "@/app/modules/ApplicationHelper";
+import { ApplicationLinearGradient } from "@/constants/application";
 
 export default function Page(): React.JSX.Element {
   const [pageChangeState, setPageChangeState] = React.useState<boolean>(false);

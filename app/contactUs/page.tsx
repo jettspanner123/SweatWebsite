@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import {ApplicationLinearGradient} from "@/app/modules/ApplicationHelper";
-import {AnimatePresence, motion} from "framer-motion";
-import MouseMagnetic from "@/app/components/MouseMagnetic";
-import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
-import {addDoc, collection} from "@firebase/firestore";
-import {FirebaseDatabase} from "../database/FirebaseConfig";
+import { ApplicationLinearGradient } from "@/constants/application";
+import { AnimatePresence, motion } from "framer-motion";
+import MouseMagnetic from "@/components/MouseMagnetic";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { addDoc, collection } from "@firebase/firestore";
+import { FirebaseDatabase } from "@/lib/firebase";
 import {IoIosCheckmarkCircle} from "react-icons/io";
 import { FaFilePrescription } from "react-icons/fa6";
 
